@@ -31,6 +31,7 @@ import { StockTable } from './StockTable';
 import { useStocks } from '../hooks/useStocks';
 import { usePartnerStocks } from '../hooks/usePartnerStocks';
 import { compareStocks } from '@util/stock-helpers';
+import { Box } from '@mui/material';
 
 type StockDetailsViewProps<T extends StockType> = {
     type: T;
@@ -120,7 +121,7 @@ export const StockDetailsView = <T extends StockType>({ type }: StockDetailsView
     };
 
     return (
-        <div className="flex flex-col gap-10 pb-5">
+        <Box display="flex" >
             <div className="mx-auto">
                 <StockUpdateForm items={materials} type={type} selectedItem={selectedMaterial} onSubmit={saveStock} isSaving={saving} />
             </div>
@@ -146,6 +147,6 @@ export const StockDetailsView = <T extends StockType>({ type }: StockDetailsView
                     />
                 ))}
             </PageSnackbarStack>
-        </div>
+        </Box>
     );
 };
