@@ -23,6 +23,7 @@ import { Input, Table } from '@catena-x/portal-shared-components';
 import { useState } from 'react';
 import { ConfidentialBanner } from '@components/ConfidentialBanner';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Box, Typography } from '@mui/material';
 
 type Customer = {
     name: string;
@@ -172,9 +173,17 @@ const dateColumns = [
                 data.row.material &&
                 data.row[index] < data.row.material.demandActual[index] + (data.row.material.demandAdditional[index] ?? 0);
             return (
-                <span className={`grid place-items-center w-full h-full ${isInsufficientProduction ? ' text-red-400' : ''}`}>
+                <Typography
+                    variant="body2"
+                    sx={{
+                        display: 'grid',
+                        placeItems: 'center',
+                        width: '100%',
+                        height: '100%',
+                        color: isInsufficientProduction ? 'red' : 'black'
+                    }}>
                     {data.row[index]}
-                </span>
+                </Typography>
             );
         },
     })),
@@ -217,13 +226,13 @@ export const SupplierDashboardView = () => {
         setSelectedMaterial(null);
     };
     return (
-        <div className="flex flex-col items-center w-full h-full">
+        <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
             <ConfidentialBanner />
-            <h1 className="text-3xl font-semibold text-gray-700">Supplier Dashboard</h1>
-            <div className="flex gap-2 w-[64rem] mb-10">
+            <Typography variant="h4" mb="1rem">Supplier Dashboard</Typography>
+            <Box sx={{ display: 'flex', gap: '0.5rem', width: '64rem', mb: '3rem' }}>
                 <Autocomplete
                     id="customer"
-                    className="w-1/2"
+                    sx={{ width: '50%' }}
                     value={selectedCustomer}
                     options={mockCustomerDemands ?? []}
                     getOptionLabel={(option) => option.name}
@@ -232,15 +241,15 @@ export const SupplierDashboardView = () => {
                 />
                 <Autocomplete
                     id="material"
-                    className="w-1/2"
+                    sx={{ width: '50%' }}
                     value={selectedMaterial}
                     options={selectedCustomer?.materials ?? []}
                     getOptionLabel={(option) => option.name}
                     renderInput={(params) => <Input {...params} label="Material*" placeholder="Select a Material" />}
                     onChange={(_, newValue) => setSelectedMaterial(newValue)}
                 />
-            </div>
-            <div className="w-full overflow-x-auto">
+            </Box>
+            <Box sx={{ width: '100%', overflowX: 'auto' }}>
                 <Table
                     title={`Customer Demand ${selectedMaterial ? `for ${selectedMaterial.name}` : ''}`}
                     noRowsMsg="Select a Material to show the customer demand"
@@ -249,7 +258,7 @@ export const SupplierDashboardView = () => {
                     getRowId={(row) => row.id}
                     hideFooter={true}
                 />
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }

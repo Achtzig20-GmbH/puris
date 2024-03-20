@@ -23,7 +23,7 @@ import { Input, LoadingButton } from '@catena-x/portal-shared-components';
 import { useCatalog } from '@hooks/edc/useCatalog';
 import { useRef, useState } from 'react';
 import { CatalogOperation } from '@models/types/edc/catalog';
-import { Card } from '@mui/material';
+import { Box, Card, List, ListItem, Typography } from '@mui/material';
 import { getCatalogOperator } from '@util/helpers';
 
 type OperationListProps = {
@@ -34,19 +34,19 @@ type OperationListProps = {
 const OperationList = ({ title, operations }: OperationListProps) => {
     return (
         <>
-            <span className="font-semibold">{title}</span>
+            <Typography variant="body1" fontWeight="600">{title}</Typography>
             {operations && operations.length > 0 ? (
-                <ul>
+                <List>
                     {operations.map((operation, index) => (
-                        <li key={index}>
+                        <ListItem key={index}>
                             {`${operation['odrl:constraint']['odrl:leftOperand']} ${getCatalogOperator(
                                 operation['odrl:constraint']['odrl:operator']['@id']
                             )} ${operation['odrl:constraint']['odrl:rightOperand']}`}
-                        </li>
+                        </ListItem>
                     ))}
-                </ul>
+                </List>
             ) : (
-                <p>None</p>
+                <Typography variant="body1">None</Typography>
             )}
         </>
     );
@@ -57,9 +57,9 @@ export const CatalogView = () => {
     const { catalog, catalogError, isLoadingCatalog } = useCatalog(edcUrl);
     const urlRef = useRef<string | null>(null);
     return (
-        <div className="flex flex-col items-center gap-4 w-full h-full">
-            <h1 className="text-3xl font-semibold text-gray-700">View EDC Catalog</h1>
-            <div className="flex items-end gap-5">
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%' }}>
+            <Typography variant="h4" mb="1rem">View EDC Catalog</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: '1.25rem' }}>
                 <Input
                     label="EDC URL"
                     type="text"
@@ -68,54 +68,58 @@ export const CatalogView = () => {
                     margin="none"
                     onChange={(event) => (urlRef.current = event.target.value)}
                 />
-                <div className="mb-3">
+                <Box mb="0.75rem">
                     <LoadingButton
                         label="Get Catalog"
                         loadIndicator="Loading..."
                         loading={isLoadingCatalog}
                         onButtonClick={() => setEdcUrl(urlRef?.current)}
                     />
-                </div>
-            </div>
+                </Box>
+            </Box>
             {catalog && catalog.length > 0 ? (
-                <ul className="flex flex-col gap-5 w-[64rem]">
+                <List sx={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '64rem' }}>
                     {catalog.map((item, index) => (
-                        <Card className="p-5">
-                            <li key={index}>
-                                <h2 className="text-xl font-semibold">Catalog Item</h2>
-                                <div className="flex w-full justify-start gap-4">
-                                    <div className="flex flex-col gap-1 w-[70ch]">
-                                        <div className="flex">
-                                            <h3 className="font-semibold w-[20ch]">Asset ID: </h3>"{item.assetId}"
-                                        </div>
-                                        <div className="flex">
-                                            <h4 className="font-semibold w-[20ch]">Asset type: </h4>"{item.assetType}"
-                                        </div>
-                                        <div className="flex">
-                                            <h4 className="font-semibold w-[20ch]">Asset action: </h4>
+                        <ListItem key={index}>
+                            <Card sx={{ padding: '1.25rem' }}>
+                                <Typography variant="h6" fontWeight="600">Catalog Item</Typography>
+                                <Box sx={{ display: 'flex', width: '100%', justifyContent: 'flex-start', gap: '1rem' }}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', width: '70ch' }}>
+                                        <Box display="flex">
+                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset ID: </Typography>"{item.assetId}"
+                                        </Box>
+                                        <Box display="flex">
+                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset type: </Typography>"{item.assetType}"
+                                        </Box>
+                                        <Box display="flex">
+                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset action: </Typography>
                                             {item.permission['odrl:action']['odrl:type']} {item.permission['odrl:target']}
-                                        </div>
-                                        <div className="flex">
-                                            <h4 className="font-semibold w-[20ch]">Asset condition: </h4>
+                                        </Box>
+                                        <Box display="flex">
+                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset condition: </Typography>
                                             {item.permission['odrl:constraint']['odrl:leftOperand'] + ' '}
                                             {getCatalogOperator(item.permission['odrl:constraint']['odrl:operator']['@id']) + ' '}
                                             {item.permission['odrl:constraint']['odrl:rightOperand']}
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col w-1/3 flex-shrink-0">
+                                        </Box>
+                                    </Box>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', width: '33.33%', flexShrink: 0 }}>
                                         <OperationList title="The following prohibitions are defined:" operations={item.prohibitions} />
                                         <OperationList title="The following obligations are defined:" operations={item.obligations} />
-                                    </div>
-                                </div>
-                            </li>
-                        </Card>
+                                    </Box>
+                                </Box>
+                            </Card>
+                        </ListItem>
                     ))}
-                </ul>
-            ) : catalogError != null ? (
-                <div className="text-red-500 py-5">There was an error retrieving the Catalog from {edcUrl}</div>
+                </List>
             ) : (
-                <div className="py-5"> {`No Catalog available for ${edcUrl}`} </div>
+                <Box py="1.25rem">
+                    {catalogError != null ? (
+                        <Typography variant="body1" color="red">There was an error retrieving the Catalog from {edcUrl}</Typography>
+                    ) : (
+                        <Typography variant="body1"> {`No Catalog available for ${edcUrl}`} </Typography>
+                    )}
+                </Box>
             )}
-        </div>
+        </Box>
     );
 };

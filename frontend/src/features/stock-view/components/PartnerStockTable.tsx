@@ -20,6 +20,7 @@ SPDX-License-Identifier: Apache-2.0
 
 import { LoadingButton, Table } from '@catena-x/portal-shared-components';
 import { Stock, StockType } from '@models/types/data/stock';
+import { Box, Typography } from '@mui/material';
 import { getUnitOfMeasurement } from '@util/helpers';
 
 type PartnerStockTableProps<T extends StockType> = {
@@ -58,10 +59,10 @@ const partnerStockTableColumns = [
     {
         field: 'customerOrder',
         renderCell: (params: { row: Stock }) => (
-            <div className="flex flex-col">
-                <span>{params.row.customerOrderNumber}</span>
-                <span>{params.row.customerOrderPositionNumber}</span>
-            </div>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="body2">{params.row.customerOrderNumber}</Typography>
+                <Typography variant="body2">{params.row.customerOrderPositionNumber}</Typography>
+            </Box>
         ),
         headerName: 'Customer Order',
         flex: 3,
@@ -81,7 +82,7 @@ const partnerStockTableColumns = [
 
 export const PartnerStockTable = <T extends StockType>({ type, materialName, partnerStocks, onRefresh, isRefreshing, lastUpdated = null }: PartnerStockTableProps<T>) => {
     return (
-        <div className="relative">
+        <Box position="relative">
             <Table
                 title={`Your ${type === 'material' ? 'Customers' : 'Suppliers'}' Stocks ${materialName ? `for ${materialName}` : ''}`}
                 noRowsMsg={
@@ -92,12 +93,18 @@ export const PartnerStockTable = <T extends StockType>({ type, materialName, par
                 columns={partnerStockTableColumns}
                 rows={partnerStocks ?? []}
                 getRowId={(row) => row.uuid}
-                hideFooter={true}
-            ></Table>
-            <div className="absolute top-8 end-8 flex items-center gap-3">
-                {lastUpdated && <div>refresh requested at {lastUpdated.toLocaleTimeString()}</div>}
-                <LoadingButton label='Refresh Stocks' loadIndicator='refreshing...' loading={isRefreshing}  variant="contained" onButtonClick={() => onRefresh()} />
-            </div>
-        </div>
+                hideFooter={true}>
+            </Table>
+            <Box sx={{ display: 'flex', position: 'absolute', alignItems: 'center', top: '2rem', right: '2rem' }}>
+                { lastUpdated && <Typography variant="body2" mr="1rem">refresh requested at {lastUpdated.toLocaleTimeString()}</Typography> }
+                <LoadingButton
+                    label='Refresh Stocks'
+                    loadIndicator='refreshing...'
+                    loading={isRefreshing}
+                    variant="contained"
+                    onButtonClick={() => onRefresh()}
+                />
+            </Box>
+        </Box>
     );
 };

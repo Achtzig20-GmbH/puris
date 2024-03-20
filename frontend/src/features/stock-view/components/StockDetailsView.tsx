@@ -121,11 +121,21 @@ export const StockDetailsView = <T extends StockType>({ type }: StockDetailsView
     };
 
     return (
-        <Box display="flex" >
-            <div className="mx-auto">
-                <StockUpdateForm items={materials} type={type} selectedItem={selectedMaterial} onSubmit={saveStock} isSaving={saving} />
-            </div>
-            <StockTable type={type} onSelection={setSelectedMaterial} stocks={stocks ?? []} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '3rem', mb: '3rem' }}>
+            <Box mx="auto">
+                <StockUpdateForm
+                    items={materials}
+                    type={type}
+                    selectedItem={selectedMaterial}
+                    onSubmit={saveStock}
+                    isSaving={saving}
+                />
+            </Box>
+            <StockTable
+                type={type}
+                onSelection={setSelectedMaterial}
+                stocks={stocks ?? []}
+            />
             <PartnerStockTable
                 type={type}
                 materialName={selectedMaterial?.material?.name}

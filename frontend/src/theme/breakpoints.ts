@@ -8,4 +8,4 @@ const breakpoints = {
     }
 }
 
-export dafault breakpoints;
+export default breakpoints;

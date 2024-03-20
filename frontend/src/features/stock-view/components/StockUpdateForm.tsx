@@ -19,7 +19,7 @@ SPDX-License-Identifier: Apache-2.0
 */
 
 import { useEffect, useReducer, useState } from 'react';
-import { Autocomplete, Checkbox, capitalize } from '@mui/material';
+import { Autocomplete, Box, Checkbox, InputLabel, capitalize } from '@mui/material';
 import { Input, LoadingButton } from '@catena-x/portal-shared-components';
 
 import { MaterialDescriptor } from '@models/types/data/material-descriptor';
@@ -80,8 +80,11 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
 
     return (
         <form className="p-5">
-            <div className="flex gap-5 justify-center">
-                <div className="w-[32rem]">
+            <Box
+                display="flex"
+                gap={3}
+                justifyItems="center">
+                <Box width="32rem">
                     <Autocomplete
                         id="material"
                         value={
@@ -140,8 +143,11 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                         onChange={(_, value) => dispatch({ type: 'partner', payload: value ?? null })}
                         isOptionEqualToValue={(option, value) => option?.uuid === value?.uuid}
                     />
-                    <div className="grid grid-cols-3 gap-2">
-                        <div className="col-span-2">
+                    <Box
+                        display="grid"
+                        gap="0.5rem"
+                        gridTemplateColumns="repeat(3, minmax(0, 1fr))">
+                        <Box gridColumn="span 2 / span 2">
                             <Input
                                 id="quantity"
                                 label="Quantity*"
@@ -151,7 +157,7 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                                 error={formError && !newStock?.quantity}
                                 onChange={(event) => dispatch({ type: 'quantity', payload: event.target.value })}
                             />
-                        </div>
+                        </Box>
                         <Autocomplete
                             id="uom"
                             value={
@@ -172,17 +178,21 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                             onChange={(_, value) => dispatch({ type: 'measurementUnit', payload: value?.key ?? null })}
                             isOptionEqualToValue={(option, value) => option?.key === value?.key}
                         />
-                    </div>
-                    <div className="flex items-center justify-end pt-7">
+                    </Box>
+                    <Box
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="flex-end"
+                        pt={4}>
                         <Checkbox
                             id="isBlocked"
                             checked={newStock?.isBlocked ?? false}
                             onChange={(event) => dispatch({ type: 'isBlocked', payload: event.target.checked })}
                         />
-                        <label htmlFor="isBlocked"> is Blocked </label>
-                    </div>
-                </div>
-                <div className="w-[32rem]">
+                        <InputLabel htmlFor="isBlocked"> is Blocked </InputLabel>
+                    </Box>
+                </Box>
+                <Box width="32rem">
                     <Autocomplete
                         id="site"
                         value={newStock?.stockLocationBpns ?? null}
@@ -211,7 +221,10 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                         )}
                         onChange={(_, value) => dispatch({ type: 'stockLocationBpna', payload: value ?? null })}
                     />
-                    <div className="grid grid-cols-2 gap-2">
+                    <Box
+                        display="grid"
+                        gap="0.5rem"
+                        gridTemplateColumns="repeat(2, minmax(0, 1fr))">
                         <Input
                             id="customer-order-number"
                             label="Customer Order Number"
@@ -239,7 +252,7 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                                 })
                             }
                         />
-                    </div>
+                    </Box>
                     <Input
                         id="supplier-order-number"
                         label="Supplier Order Number"
@@ -249,20 +262,22 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                         error={formError && !!newStock?.customerOrderNumber && !newStock?.supplierOrderNumber}
                         onChange={(event) => dispatch({ type: 'supplierOrderNumber', payload: event.target.value })}
                     />
-                </div>
-            </div>
-            <div className="mt-7 mx-auto w-48">
+                </Box>
+            </Box>
+            <Box
+                mt="1.8rem"
+                mx="auto"
+                width="12rem">
                 <LoadingButton
-                    className="w-full"
                     variant="contained"
                     color="primary"
                     loading={isSaving}
                     loadIndicator="Saving..."
                     onButtonClick={handleSubmit}
                     label="Add or Update"
-                    fullWidth={true}
-                ></LoadingButton>
-            </div>
+                    fullWidth={true}>
+                </LoadingButton>
+            </Box>
         </form>
     );
 };

@@ -23,6 +23,7 @@ import Card from '@mui/material/Card';
 
 import { useTransfers } from '@hooks/edc/useTransfers';
 import { Transfer } from '@models/types/edc/transfer';
+import { Box, List, ListItem, Typography } from '@mui/material';
 
 type TransferCardProps = {
     transfer: Transfer;
@@ -30,44 +31,44 @@ type TransferCardProps = {
 
 const TransferCard = ({ transfer }: TransferCardProps) => {
     return (
-        <Card className="p-5">
-            <h2 className="text-xl font-semibold mb-3">Transfer</h2>
-            <div className="flex w-full flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Transfer Id: </span>
+        <Card sx={{ padding: '1.25rem' }}>
+            <Typography variant="h6" mb="0.5rem" fontWeight="600">Transfer</Typography>
+            <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', gap: '1rem' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Transfer Id: </Typography>
                         {transfer['@id']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Correlation Id: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Correlation Id: </Typography>
                         {transfer['edc:correlationId']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> State: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> State: </Typography>
                         {transfer['edc:state']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> State Timestamp: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> State Timestamp: </Typography>
                         {new Date(transfer['edc:stateTimestamp']).toLocaleString()}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Type: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Type: </Typography>
                         {transfer['edc:type']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Asset Id: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Asset Id: </Typography>
                         {transfer['edc:assetId']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Contract Id: </span>
-                        <span className="break-all w-[60ch]">{transfer['edc:contractId']}</span>
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Connector Id: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Contract Id: </Typography>
+                        <Typography variant="body1" sx={{ wordBreak: 'break-all', width: '60ch' }}>{transfer['edc:contractId']}</Typography>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Connector Id: </Typography>
                         {transfer['edc:connectorId']}
-                    </div>
-                </div>
-            </div>
+                    </Box>
+                </Box>
+            </Box>
         </Card>
     );
 };
@@ -75,19 +76,19 @@ const TransferCard = ({ transfer }: TransferCardProps) => {
 export const TransferView = () => {
     const { transfers } = useTransfers();
     return (
-        <div className="flex flex-col items-center w-full h-full">
-            <h1 className="text-3xl font-semibold text-gray-700 mb-10">Transfers</h1>
-            <ul className="flex flex-col gap-3 w-[100ch]">
+        <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography variant="h4" mb="1rem">Transfers</Typography>
+            <List sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100ch' }}>
                 {transfers && transfers.length > 0 ? (
                     transfers.map((transfer) => (
-                        <li>
+                        <ListItem>
                             <TransferCard transfer={transfer} />
-                        </li>
+                        </ListItem>
                     ))
                 ) : (
-                    <p className='text-center'>No transfers found. This Page will be updated as soon as there are transfers.</p>
+                    <Typography variant="body1" align="center">No transfers found. This Page will be updated as soon as there are transfers.</Typography>
                 )}
-            </ul>
-        </div>
+            </List>
+        </Box>
     );
 };

@@ -20,14 +20,15 @@ SPDX-License-Identifier: Apache-2.0
 
 import { Outlet } from 'react-router-dom';
 import { SideBar } from './SideBar';
+import { Box } from '@mui/material';
 
 export const Layout = () => {
     return (
-        <div className="flex h-[100vh] w-full">
+        <Box sx={{ display: 'flex', height: '100vh', width: '100%' }}>
             <SideBar></SideBar>
-            <main className="flex-grow overflow-y-auto py-5 px-7">
+            <Box sx={{ px: '1.75rem', py: '1.25rem', flexGrow: '1', overflowY: 'auto' }}>
                 <Outlet />
-            </main>
-        </div>
+            </Box>
+        </Box>
     );
 }

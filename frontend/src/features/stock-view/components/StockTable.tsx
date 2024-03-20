@@ -20,7 +20,7 @@ SPDX-License-Identifier: Apache-2.0
 
 import { Table } from '@catena-x/portal-shared-components';
 import { Stock, StockType } from '@models/types/data/stock';
-import { capitalize } from '@mui/material';
+import { Box, Typography, capitalize } from '@mui/material';
 import { getUnitOfMeasurement } from '@util/helpers';
 
 type StockTableProps = {
@@ -34,10 +34,10 @@ const createStockTableColumns = (type: StockType) => [
         field: 'materialNumber',
         headerName: capitalize(type),
         renderCell: (params: { row: Stock }) => (
-            <div className="flex flex-col">
-                <span>{params.row.material?.name}</span>
-                <span>({type === 'material' ? params.row.material?.materialNumberCustomer : params.row.material?.materialNumberSupplier})</span>
-            </div>
+            <Box display="flex" flexDirection="column">
+                <Typography variant="body2">{params.row.material?.name}</Typography>
+                <Typography variant="body2">({type === 'material' ? params.row.material?.materialNumberCustomer : params.row.material?.materialNumberSupplier})</Typography>
+            </Box>
         ),
         flex: 4,
     },
@@ -50,10 +50,10 @@ const createStockTableColumns = (type: StockType) => [
     {
         field: 'partner',
         renderCell: (params: { row: Stock }) => (
-            <div className="flex flex-col">
-                <span>{params.row.partner?.name}</span>
-                <span>({params.row.partner?.bpnl})</span>
-            </div>
+            <Box display="flex" flexDirection="column">
+                <Typography variant="body2">{params.row.partner?.name}</Typography>
+                <Typography variant="body2">({params.row.partner?.bpnl})</Typography>
+            </Box>
         ),
         headerName: 'Allocated to Partner',
         flex: 4,

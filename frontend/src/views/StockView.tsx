@@ -23,27 +23,28 @@ import { useState } from 'react';
 import { Tab, TabPanel, Tabs } from '@catena-x/portal-shared-components';
 import { ConfidentialBanner } from '@components/ConfidentialBanner';
 import { StockDetailsView } from '@features/stock-view/components/StockDetailsView';
+import { Box, Typography } from '@mui/material';
 
 export const StockView = () => {
     const [selectedTab, setSelectedTab] = useState<number>(0);
     return (
         <>
             <ConfidentialBanner />
-            <div className="flex flex-col items-center w-full h-full p-5">
-                <h1 className="text-3xl font-semibold mb-5">View and manage stocks</h1>
+            <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center', padding: '1.25rem' }}>
+                <Typography variant="h4" mb="1rem">View and manage stocks</Typography>
                 <Tabs value={selectedTab} onChange={(_, value: number) => setSelectedTab(value)}>
                     <Tab label="Material Stocks"></Tab>
                     <Tab label="Product Stocks"></Tab>
                 </Tabs>
-                <div className="flex w-full">
+                <Box display="flex" width="100%">
                     <TabPanel value={selectedTab} index={0}>
                         <StockDetailsView type="material" />
                     </TabPanel>
                     <TabPanel value={selectedTab} index={1}>
                         <StockDetailsView type="product" />
                     </TabPanel>
-                </div>
-            </div>
+                </Box>
+            </Box>
         </>
     );
 };

@@ -23,6 +23,7 @@ import Card from '@mui/material/Card';
 
 import { useNegotiations } from '@hooks/edc/useNegotiations';
 import { Negotiation } from '@models/types/edc/negotiation';
+import { Box, List, ListItem, Typography } from '@mui/material';
 
 type NegotiationCardProps = {
     negotiation: Negotiation;
@@ -30,60 +31,60 @@ type NegotiationCardProps = {
 
 const NegotiationCard = ({negotiation }: NegotiationCardProps) => {
     return (
-        <Card className="p-5">
-            <h2 className="text-xl font-semibold mb-3">Negotiation</h2>
-            <div className="flex w-full flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Negotiation Id: </span>
+        <Card sx={{ padding: '1.25rem' }}>
+            <Typography variant="h6" mb="0.5rem" fontWeight="600">Negotiation</Typography>
+            <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', gap: '1rem' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Negotiation Id: </Typography>
                         {negotiation['@id']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Aggreement  Id: </span>
-                        <span className="break-all w-[60ch]">{negotiation['edc:contractAgreementId']}</span>
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Type: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Agreement  Id: </Typography>
+                        <Typography variant="body1" sx={{ wordBreak: 'break-all', width: '60ch' }}>{negotiation['edc:contractAgreementId']}</Typography>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Type: </Typography>
                         {negotiation['edc:type']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> State: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> State: </Typography>
                         {negotiation['edc:state']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> CounterParty: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> CounterParty: </Typography>
                         {negotiation['edc:counterPartyId']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Counterparty EDC URL: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Counterparty EDC URL: </Typography>
                         {negotiation['edc:counterPartyAddress']}
-                    </div>
-                    <div className="flex gap-3">
-                        <span className="w-[30ch] font-semibold"> Timestamp: </span>
+                    </Box>
+                    <Box display="flex" gap="1rem">
+                        <Typography variant="body1" fontWeight="600" width="30ch"> Timestamp: </Typography>
                         {new Date(negotiation['edc:createdAt']).toLocaleString()}
-                    </div>
-                </div>
-            </div>
+                    </Box>
+                </Box>
+            </Box>
         </Card>
     );
 };
 
 export const NegotiationView = () => {
-    const { negotiations  } = useNegotiations();
+    const { negotiations } = useNegotiations();
     return (
-        <div className="flex flex-col items-center w-full h-full">
-            <h1 className="text-3xl font-semibold text-gray-700 mb-10">Negotiation</h1>
-            <ul className="flex flex-col gap-3 w-[100ch]">
+        <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography variant="h4" mb="1rem">Negotiation</Typography>
+            <List sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100ch' }}>
                 {negotiations && negotiations.length > 0 ? (
                     negotiations.map((negotiation) => (
-                        <li>
+                        <ListItem>
                             <NegotiationCard negotiation={negotiation} />
-                        </li>
+                        </ListItem>
                     ))
                 ) : (
-                    <p className='text-center'>No negotiations found. This list will be updated when Negotiations happen.</p>
+                    <Typography variant="body1" align="center">No negotiations found. This list will be updated when Negotiations happen.</Typography>
                 )}
-            </ul>
-        </div>
+            </List>
+        </Box>
     );
 }
