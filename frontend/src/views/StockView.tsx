@@ -30,7 +30,14 @@ export const StockView = () => {
     return (
         <>
             <ConfidentialBanner />
-            <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center', padding: '1.25rem' }}>
+            <Box sx={{
+                display: 'flex',
+                height: '100%',
+                width: '100%',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '1.25rem'
+            }}>
                 <Typography variant="h4" mb="1rem">View and manage stocks</Typography>
                 <Tabs value={selectedTab} onChange={(_, value: number) => setSelectedTab(value)}>
                     <Tab label="Material Stocks"></Tab>

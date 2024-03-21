@@ -95,7 +95,13 @@ export const PartnerStockTable = <T extends StockType>({ type, materialName, par
                 getRowId={(row) => row.uuid}
                 hideFooter={true}>
             </Table>
-            <Box sx={{ display: 'flex', position: 'absolute', alignItems: 'center', top: '2rem', right: '2rem' }}>
+            <Box sx={{
+                display: 'flex',
+                position: 'absolute',
+                alignItems: 'center',
+                top: '2rem',
+                right: '2rem'
+            }}>
                 { lastUpdated && <Typography variant="body2" mr="1rem">refresh requested at {lastUpdated.toLocaleTimeString()}</Typography> }
                 <LoadingButton
                     label='Refresh Stocks'

@@ -226,10 +226,21 @@ export const SupplierDashboardView = () => {
         setSelectedMaterial(null);
     };
     return (
-        <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
+        <Box sx={{
+            display: 'flex',
+            height: '100%',
+            width: '100%',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
             <ConfidentialBanner />
             <Typography variant="h4" mb="1rem">Supplier Dashboard</Typography>
-            <Box sx={{ display: 'flex', gap: '0.5rem', width: '64rem', mb: '3rem' }}>
+            <Box sx={{
+                display: 'flex',
+                gap: '0.5rem',
+                width: '64rem',
+                mb: '3rem'
+            }}>
                 <Autocomplete
                     id="customer"
                     sx={{ width: '50%' }}

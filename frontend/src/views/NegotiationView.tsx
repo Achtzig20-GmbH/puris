@@ -33,8 +33,17 @@ const NegotiationCard = ({negotiation }: NegotiationCardProps) => {
     return (
         <Card sx={{ padding: '1.25rem' }}>
             <Typography variant="h6" mb="0.5rem" fontWeight="600">Negotiation</Typography>
-            <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', gap: '1rem' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <Box sx={{
+                display: 'flex',
+                width: '100%',
+                flexDirection: 'column',
+                gap: '1rem'
+            }}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem'
+                }}>
                     <Box display="flex" gap="1rem">
                         <Typography variant="body1" fontWeight="600" width="30ch"> Negotiation Id: </Typography>
                         {negotiation['@id']}
@@ -72,9 +81,20 @@ const NegotiationCard = ({negotiation }: NegotiationCardProps) => {
 export const NegotiationView = () => {
     const { negotiations } = useNegotiations();
     return (
-        <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
+        <Box sx={{
+            display: 'flex',
+            height: '100%',
+            width: '100%',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
             <Typography variant="h4" mb="1rem">Negotiation</Typography>
-            <List sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100ch' }}>
+            <List sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+                width: '100ch'
+            }}>
                 {negotiations && negotiations.length > 0 ? (
                     negotiations.map((negotiation) => (
                         <ListItem>

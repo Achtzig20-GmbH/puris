@@ -57,9 +57,19 @@ export const CatalogView = () => {
     const { catalog, catalogError, isLoadingCatalog } = useCatalog(edcUrl);
     const urlRef = useRef<string | null>(null);
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%' }}>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            height: '100%',
+            width: '100%'
+        }}>
             <Typography variant="h4" mb="1rem">View EDC Catalog</Typography>
-            <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: '1.25rem' }}>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'flex-end',
+                gap: '1.25rem'
+            }}>
                 <Input
                     label="EDC URL"
                     type="text"
@@ -78,18 +88,35 @@ export const CatalogView = () => {
                 </Box>
             </Box>
             {catalog && catalog.length > 0 ? (
-                <List sx={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '64rem' }}>
+                <List sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1.25rem',
+                    width: '64rem'
+                }}>
                     {catalog.map((item, index) => (
                         <ListItem key={index}>
                             <Card sx={{ padding: '1.25rem' }}>
                                 <Typography variant="h6" fontWeight="600">Catalog Item</Typography>
-                                <Box sx={{ display: 'flex', width: '100%', justifyContent: 'flex-start', gap: '1rem' }}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', width: '70ch' }}>
+                                <Box sx={{
+                                    display: 'flex',
+                                    width: '100%',
+                                    justifyContent: 'flex-start',
+                                    gap: '1rem'
+                                }}>
+                                    <Box sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '0.25rem',
+                                        width: '70ch'
+                                    }}>
                                         <Box display="flex">
-                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset ID: </Typography>"{item.assetId}"
+                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset ID: </Typography>
+                                            "{item.assetId}"
                                         </Box>
                                         <Box display="flex">
-                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset type: </Typography>"{item.assetType}"
+                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset type: </Typography>
+                                            "{item.assetType}"
                                         </Box>
                                         <Box display="flex">
                                             <Typography variant="body1" fontWeight="600" width="20ch">Asset action: </Typography>
@@ -102,7 +129,12 @@ export const CatalogView = () => {
                                             {item.permission['odrl:constraint']['odrl:rightOperand']}
                                         </Box>
                                     </Box>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', width: '33.33%', flexShrink: 0 }}>
+                                    <Box sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        width: '33.33%',
+                                        flexShrink: 0
+                                    }}>
                                         <OperationList title="The following prohibitions are defined:" operations={item.prohibitions} />
                                         <OperationList title="The following obligations are defined:" operations={item.obligations} />
                                     </Box>

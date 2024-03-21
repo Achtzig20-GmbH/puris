@@ -121,7 +121,12 @@ export const StockDetailsView = <T extends StockType>({ type }: StockDetailsView
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '3rem', mb: '3rem' }}>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '3rem',
+            mb: '3rem'
+        }}>
             <Box mx="auto">
                 <StockUpdateForm
                     items={materials}

@@ -79,7 +79,7 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
     };
 
     return (
-        <form className="p-5">
+        <Box component="form" p="1rem">
             <Box
                 display="flex"
                 gap={3}
@@ -278,6 +278,6 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                     fullWidth={true}>
                 </LoadingButton>
             </Box>
-        </form>
+        </Box>
     );
 };

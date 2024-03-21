@@ -56,3 +56,22 @@ body {
     display: none;
 }
 
+.side-menu-item,
+button.side-menu-item {
+    text-transform: capitalize;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: darkslategrey;
+    background-color: aliceblue;
+    border-radius: 0.4rem;
+    width: 100%;
+}
+
+.side-menu-item:hover,
+.side-menu-item.active,
+button.side-menu-item:hover,
+button.side-menu-item.active {
+    background: lightgray;
+}

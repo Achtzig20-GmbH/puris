@@ -33,8 +33,17 @@ const TransferCard = ({ transfer }: TransferCardProps) => {
     return (
         <Card sx={{ padding: '1.25rem' }}>
             <Typography variant="h6" mb="0.5rem" fontWeight="600">Transfer</Typography>
-            <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', gap: '1rem' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <Box sx={{
+                display: 'flex',
+                width: '100%',
+                flexDirection: 'column',
+                gap: '1rem'
+            }}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem'
+                }}>
                     <Box display="flex" gap="1rem">
                         <Typography variant="body1" fontWeight="600" width="30ch"> Transfer Id: </Typography>
                         {transfer['@id']}
@@ -76,9 +85,20 @@ const TransferCard = ({ transfer }: TransferCardProps) => {
 export const TransferView = () => {
     const { transfers } = useTransfers();
     return (
-        <Box sx={{ display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
+        <Box sx={{
+            display: 'flex',
+            height: '100%',
+            width: '100%',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
             <Typography variant="h4" mb="1rem">Transfers</Typography>
-            <List sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100ch' }}>
+            <List sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+                width: '100ch'
+            }}>
                 {transfers && transfers.length > 0 ? (
                     transfers.map((transfer) => (
                         <ListItem>

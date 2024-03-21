@@ -24,9 +24,18 @@ import { Box } from '@mui/material';
 
 export const Layout = () => {
     return (
-        <Box sx={{ display: 'flex', height: '100vh', width: '100%' }}>
+        <Box sx={{
+            display: 'flex',
+            height: '100vh',
+            width: '100%'
+        }}>
             <SideBar></SideBar>
-            <Box sx={{ px: '1.75rem', py: '1.25rem', flexGrow: '1', overflowY: 'auto' }}>
+            <Box sx={{
+                px: '1.75rem',
+                py: '1.25rem',
+                flexGrow: '1',
+                overflowY: 'auto'
+            }}>
                 <Outlet />
             </Box>
         </Box>

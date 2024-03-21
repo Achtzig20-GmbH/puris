@@ -1,4 +1,4 @@
-import typography from "../typography";
+import typography from "./typography";
 //import MuiButton from "./MuiButton";
 
 const components = {

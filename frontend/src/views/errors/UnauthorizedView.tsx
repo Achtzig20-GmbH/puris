@@ -18,10 +18,19 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
+import { Box, Typography } from "@mui/material";
+
 export const UnauthorizedView = () => {
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full">
-            <h1 className="text-4xl font-bold text-gray-700">Unauthorized</h1>
-        </div>
+        <Box sx={{
+            display: 'flex',
+            height: '100%',
+            width: '100%',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }}>
+            <Typography variant="h3">Unauthorized</Typography>
+        </Box>
     );
 }

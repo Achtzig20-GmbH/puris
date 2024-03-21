@@ -28,6 +28,7 @@ import TrashIcon from '@/assets/icons/trash.svg';
 import { Typography } from '@catena-x/portal-shared-components';
 import { Role } from '@models/types/auth/role';
 import { useAuth } from '@hooks/useAuth';
+import { Box, Button, List, ListItem } from '@mui/material';
 
 type SideBarItemProps = (
     | {
@@ -81,8 +82,8 @@ const sideBarItems: SideBarItemProps[] = [
 ];
 
 const calculateClassName = ({ isActive = false, isPending = false, isTransitioning = false }) => {
-    const defaultClasses = 'flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 active:bg-gray-300 w-full';
-    return `${defaultClasses}${isActive || isPending || isTransitioning ? ' bg-gray-300' : ''}`;
+    const defaultClasses = 'side-menu-item';
+    return `${defaultClasses}${isActive || isPending || isTransitioning ? ' active' : ''}`;
 }
 
 const SideBarItem = (props: SideBarItemProps) => {
@@ -91,40 +92,59 @@ const SideBarItem = (props: SideBarItemProps) => {
         return null;
     }
     return (
-        <li key={props.name}>
+        <ListItem sx={{ padding: 0 }} key={props.name}>
             {props.variant === 'button' ? (
-                <button className={calculateClassName({})} onClick={props.action}>
-                    <img className="mr-2" src={props.icon} alt="Icon" /> <span className="min-w-0 break-words">{props.name}</span>
-                </button>
+                <Button className={calculateClassName({})} onClick={props.action}>
+                    <Box component="img" mr="0.5rem" src={props.icon} alt="Icon" />
+                    <Typography variant="body1" overflow-wrap="break-word">{props.name}</Typography>
+                </Button>
             ) : (
                 <NavLink to={props.path} className={calculateClassName}>
-                    <img className="mr-2" src={props.icon} alt="Icon" /> <span className="min-w-0 break-words">{props.name}</span>
+                    <Box component="img" mr="0.5rem" src={props.icon} alt="Icon" />
+                    <Typography variant="body1" overflow-wrap="break-word">{props.name}</Typography>
                 </NavLink>
             )}
-        </li>
+        </ListItem>
     );
 }
 
 export const SideBar = () => {
     return (
-        <aside className="flex flex-col flex-shrink-0 gap-5 h-full w-64 border-r py-5 px-3 overflow-y-auto">
-            <header className="flex justify-center">
-                <Typography variant="h2" className="text-3xl font-semibold text-center text-blue-800">
+        <Box
+            component="aside"
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexShrink: 0,
+                gap: '1.5rem',
+                height: '100%',
+                width: '16rem',
+                borderRightWidth: '1px',
+                padding: '1.25rem 0.75rem',
+                overflowY: 'auto'
+            }}>
+            <Box component="header" display="flex" justifyContent="center">
+                <Typography
+                    variant="h2"
+                    color="navy"
+                    fontSize="2rem"
+                    fontWeight="600"
+                    mt="1rem">
                     PURIS
                 </Typography>
-            </header>
-            <nav>
-                <ul className="flex flex-col gap-3">
+            </Box>
+            <Box component="nav">
+                <List sx={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     {sideBarItems.map((item) => (
                         <SideBarItem key={item.name} {...item} />
                     ))}
-                </ul>
-            </nav>
-            <footer className="flex justify-center mt-auto">
-                <Link to="/aboutLicense" className="hover:text-gray-500">
+                </List>
+            </Box>
+            <Box component="footer" display="flex" justifyContent="center" mt="auto">
+                <Link to="/aboutLicense">
                     About License
                 </Link>
-            </footer>
-        </aside>
+            </Box>
+        </Box>
     );
 }
