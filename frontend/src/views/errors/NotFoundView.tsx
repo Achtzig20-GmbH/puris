@@ -30,8 +30,8 @@ export const NotFoundView = () => {
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-            <Typography variant="h4">404</Typography>
-            <Typography variant="body1" color="gray">Page not found</Typography>
+            <Typography variant="subtitle1">404</Typography>
+            <Typography variant="body1" color="secondary">Page not found</Typography>
         </Box>
     );
 }

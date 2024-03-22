@@ -29,9 +29,9 @@ export const ErrorView = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <Typography variant="h4" mb="1rem">Error</Typography>
-            <Typography variant="body1" color="gray">Something went wrong.</Typography>
-            <Typography variant="body1" color="gray">Try reloading the page. If the error persists please contact our support team.</Typography>
+            <Typography variant="subtitle1">Error</Typography>
+            <Typography variant="body1" color="secondary">Something went wrong.</Typography>
+            <Typography variant="body1" color="secondary">Try reloading the page. If the error persists please contact our support team.</Typography>
         </Box>
     );
 }

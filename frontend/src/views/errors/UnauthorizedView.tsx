@@ -30,7 +30,7 @@ export const UnauthorizedView = () => {
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-            <Typography variant="h3">Unauthorized</Typography>
+            <Typography variant="subtitle1">Unauthorized</Typography>
         </Box>
     );
 }

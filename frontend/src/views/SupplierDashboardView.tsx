@@ -175,12 +175,12 @@ const dateColumns = [
             return (
                 <Typography
                     variant="body2"
+                    color={isInsufficientProduction ? 'error' : ''}
                     sx={{
                         display: 'grid',
                         placeItems: 'center',
                         width: '100%',
-                        height: '100%',
-                        color: isInsufficientProduction ? 'red' : 'black'
+                        height: '100%'
                     }}>
                     {data.row[index]}
                 </Typography>
@@ -234,7 +234,7 @@ export const SupplierDashboardView = () => {
             alignItems: 'center'
         }}>
             <ConfidentialBanner />
-            <Typography variant="h4" mb="1rem">Supplier Dashboard</Typography>
+            <Typography variant="subtitle1" mt="1.25rem">Supplier Dashboard</Typography>
             <Box sx={{
                 display: 'flex',
                 gap: '0.5rem',

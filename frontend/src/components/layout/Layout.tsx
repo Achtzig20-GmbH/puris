@@ -34,7 +34,8 @@ export const Layout = () => {
                 px: '1.75rem',
                 py: '1.25rem',
                 flexGrow: '1',
-                overflowY: 'auto'
+                overflowY: 'auto',
+                overflowX: 'hidden'
             }}>
                 <Outlet />
             </Box>

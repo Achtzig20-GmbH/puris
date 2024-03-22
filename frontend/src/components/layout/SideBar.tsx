@@ -117,7 +117,6 @@ export const SideBar = () => {
                 flexDirection: 'column',
                 flexShrink: 0,
                 gap: '1.5rem',
-                height: '100%',
                 width: '16rem',
                 borderRightWidth: '1px',
                 padding: '1.25rem 0.75rem',
@@ -126,7 +125,7 @@ export const SideBar = () => {
             <Box component="header" display="flex" justifyContent="center">
                 <Typography
                     variant="h2"
-                    color="navy"
+                    color="primary"
                     fontSize="2rem"
                     fontWeight="600"
                     mt="1rem">

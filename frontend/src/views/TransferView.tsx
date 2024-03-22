@@ -92,7 +92,7 @@ export const TransferView = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <Typography variant="h4" mb="1rem">Transfers</Typography>
+            <Typography variant="subtitle1">Transfers</Typography>
             <List sx={{
                 display: 'flex',
                 flexDirection: 'column',

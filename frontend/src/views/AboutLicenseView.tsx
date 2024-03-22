@@ -52,7 +52,7 @@ export const AboutLicenseView = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <Typography variant="h4" mb="1rem">About License</Typography>
+            <Typography variant="subtitle1">About License</Typography>
             <Box width="32rem">
                 <Table
                     columnHeaderHeight={0}

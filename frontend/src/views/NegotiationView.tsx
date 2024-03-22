@@ -88,7 +88,7 @@ export const NegotiationView = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <Typography variant="h4" mb="1rem">Negotiation</Typography>
+            <Typography variant="subtitle1">Negotiation</Typography>
             <List sx={{
                 display: 'flex',
                 flexDirection: 'column',

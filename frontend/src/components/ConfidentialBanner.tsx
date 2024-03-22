@@ -19,12 +19,12 @@ SPDX-License-Identifier: Apache-2.0
 */
 
 import { Box, Typography } from "@mui/material";
+import palette from "../theme/palette";
 
 export const ConfidentialBanner = () => {
     return (
         <Box sx={{
-            backgroundColor: '#ffedd5',
-            color: 'red',
+            backgroundColor: palette.error.light,
             fontWeight: '600',
             width: '100%',
             display: 'flex',
@@ -34,7 +34,7 @@ export const ConfidentialBanner = () => {
             marginBottom: '1rem',
             textAlign: 'center'
         }}>
-            <Typography variant="body1">
+            <Typography variant="body1" color="error">
                 IMPORTANT: Please note that the data shown may be <b> competitively sensitive </b> and, according to appliable antitrust
                 laws, <b> must not </b> be shared with competitors. Please consult your legal department, if necessary.
             </Typography>

@@ -24,9 +24,13 @@ import './index.css';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router.tsx';
 import { AuthContextProvider } from '@contexts/authContext.tsx';
+import theme from './theme/index.ts';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <AuthContextProvider>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={theme}>
+            <RouterProvider router={router} />
+        </ThemeProvider>
     </AuthContextProvider>
 );

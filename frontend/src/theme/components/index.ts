@@ -1,9 +1,7 @@
-import typography from "./typography";
-//import MuiButton from "./MuiButton";
+import MuiTypography from "./MuiTypography";
 
 const components = {
-    //MuiButton,
-    MuiTypography: typography
+    MuiTypography,
 }
 
 export default components;

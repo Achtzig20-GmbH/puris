@@ -64,7 +64,7 @@ export const CatalogView = () => {
             height: '100%',
             width: '100%'
         }}>
-            <Typography variant="h4" mb="1rem">View EDC Catalog</Typography>
+            <Typography variant="subtitle1">View EDC Catalog</Typography>
             <Box sx={{
                 display: 'flex',
                 alignItems: 'flex-end',
@@ -146,7 +146,7 @@ export const CatalogView = () => {
             ) : (
                 <Box py="1.25rem">
                     {catalogError != null ? (
-                        <Typography variant="body1" color="red">There was an error retrieving the Catalog from {edcUrl}</Typography>
+                        <Typography variant="body1" color="error">There was an error retrieving the Catalog from {edcUrl}</Typography>
                     ) : (
                         <Typography variant="body1"> {`No Catalog available for ${edcUrl}`} </Typography>
                     )}

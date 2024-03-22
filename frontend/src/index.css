@@ -40,6 +40,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+body {
+    margin: 0;
+}
 
 .MuiDataGrid-root > .MuiBox-root h5 > span {
     display: none;

@@ -38,12 +38,12 @@ export const StockView = () => {
                 alignItems: 'center',
                 padding: '1.25rem'
             }}>
-                <Typography variant="h4" mb="1rem">View and manage stocks</Typography>
+                <Typography variant="subtitle1">View and manage stocks</Typography>
                 <Tabs value={selectedTab} onChange={(_, value: number) => setSelectedTab(value)}>
                     <Tab label="Material Stocks"></Tab>
                     <Tab label="Product Stocks"></Tab>
                 </Tabs>
-                <Box display="flex" width="100%">
+                <Box display="flex" width="100%" justifyContent='center'>
                     <TabPanel value={selectedTab} index={0}>
                         <StockDetailsView type="material" />
                     </TabPanel>
