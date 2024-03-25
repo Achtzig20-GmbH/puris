@@ -18,8 +18,9 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import palette from "../theme/palette";
+import Text from '../theme/components/Text';
 
 export const ConfidentialBanner = () => {
     return (
@@ -34,10 +35,10 @@ export const ConfidentialBanner = () => {
             marginBottom: '1rem',
             textAlign: 'center'
         }}>
-            <Typography variant="body1" color="error">
+            <Text color="error">
                 IMPORTANT: Please note that the data shown may be <b> competitively sensitive </b> and, according to appliable antitrust
                 laws, <b> must not </b> be shared with competitors. Please consult your legal department, if necessary.
-            </Typography>
+            </Text>
         </Box>
     );
 };

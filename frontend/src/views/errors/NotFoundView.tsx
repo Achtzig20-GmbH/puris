@@ -18,7 +18,9 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Text from '../../theme/components/Text';
+import Subtitle from "../../theme/components/Subtitle";
 
 export const NotFoundView = () => {
     return (
@@ -30,8 +32,8 @@ export const NotFoundView = () => {
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-            <Typography variant="subtitle1">404</Typography>
-            <Typography variant="body1" color="secondary">Page not found</Typography>
+            <Subtitle>404</Subtitle>
+            <Text color="secondary">Page not found</Text>
         </Box>
     );
 }

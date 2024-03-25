@@ -18,7 +18,9 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Text from '../../theme/components/Text';
+import Subtitle from "../../theme/components/Subtitle";
 
 export const ErrorView = () => {
     return (
@@ -29,9 +31,9 @@ export const ErrorView = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <Typography variant="subtitle1">Error</Typography>
-            <Typography variant="body1" color="secondary">Something went wrong.</Typography>
-            <Typography variant="body1" color="secondary">Try reloading the page. If the error persists please contact our support team.</Typography>
+            <Subtitle>Error</Subtitle>
+            <Text color="secondary">Something went wrong.</Text>
+            <Text color="secondary">Try reloading the page. If the error persists please contact our support team.</Text>
         </Box>
     );
 }

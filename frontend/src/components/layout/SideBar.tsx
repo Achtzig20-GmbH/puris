@@ -25,10 +25,11 @@ import HomeIcon from '@/assets/icons/home.svg';
 import CatalogIcon from '@/assets/icons/catalog.svg';
 import StockIcon from '@/assets/icons/stock.svg';
 import TrashIcon from '@/assets/icons/trash.svg';
-import { Typography } from '@catena-x/portal-shared-components';
 import { Role } from '@models/types/auth/role';
 import { useAuth } from '@hooks/useAuth';
 import { Box, Button, List, ListItem } from '@mui/material';
+import Text from '../../theme/components/Text';
+import Logo from '../../theme/components/Logo';
 
 type SideBarItemProps = (
     | {
@@ -96,12 +97,12 @@ const SideBarItem = (props: SideBarItemProps) => {
             {props.variant === 'button' ? (
                 <Button className={calculateClassName({})} onClick={props.action}>
                     <Box component="img" mr="0.5rem" src={props.icon} alt="Icon" />
-                    <Typography variant="body1" overflow-wrap="break-word">{props.name}</Typography>
+                    <Text overflow-wrap="break-word">{props.name}</Text>
                 </Button>
             ) : (
                 <NavLink to={props.path} className={calculateClassName}>
                     <Box component="img" mr="0.5rem" src={props.icon} alt="Icon" />
-                    <Typography variant="body1" overflow-wrap="break-word">{props.name}</Typography>
+                    <Text overflow-wrap="break-word">{props.name}</Text>
                 </NavLink>
             )}
         </ListItem>
@@ -123,14 +124,7 @@ export const SideBar = () => {
                 overflowY: 'auto'
             }}>
             <Box component="header" display="flex" justifyContent="center">
-                <Typography
-                    variant="h2"
-                    color="primary"
-                    fontSize="2rem"
-                    fontWeight="600"
-                    mt="1rem">
-                    PURIS
-                </Typography>
+                <Logo>PURIS</Logo>
             </Box>
             <Box component="nav">
                 <List sx={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>

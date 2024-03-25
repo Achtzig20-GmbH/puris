@@ -20,7 +20,7 @@ SPDX-License-Identifier: Apache-2.0
 
 import { useEffect, useReducer, useState } from 'react';
 import { Autocomplete, Box, Checkbox, InputLabel, capitalize } from '@mui/material';
-import { Input, LoadingButton } from '@catena-x/portal-shared-components';
+import { Input } from '@catena-x/portal-shared-components';
 
 import { MaterialDescriptor } from '@models/types/data/material-descriptor';
 import { Stock, StockType } from '@models/types/data/stock';
@@ -30,6 +30,7 @@ import { getUnitOfMeasurement } from '@util/helpers';
 import { useSites } from '../hooks/useSites';
 import { usePartners } from '../hooks/usePartners';
 import { validateStock } from '@util/stock-helpers';
+import CustomButton from '../../../theme/components/CustomButton';
 
 type StockUpdateFormProps<T extends StockType> = {
     items: MaterialDescriptor[] | null;
@@ -55,7 +56,7 @@ const stockReducer = (
     };
 };
 
-export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem, isSaving, onSubmit }: StockUpdateFormProps<T>) => {
+export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem, onSubmit }: StockUpdateFormProps<T>) => {
     const [newStock, dispatch] = useReducer(stockReducer, selectedItem ?? {});
     const [formError, setFormError] = useState(false);
     const { sites } = useSites();
@@ -268,15 +269,10 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                 mt="1.8rem"
                 mx="auto"
                 width="12rem">
-                <LoadingButton
-                    variant="contained"
-                    color="primary"
-                    loading={isSaving}
-                    loadIndicator="Saving..."
-                    onButtonClick={handleSubmit}
-                    label="Add or Update"
-                    fullWidth={true}>
-                </LoadingButton>
+                <CustomButton
+                    onClick={handleSubmit}>
+                        Add or Update
+                </CustomButton>
             </Box>
         </Box>
     );

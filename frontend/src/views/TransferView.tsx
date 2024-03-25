@@ -23,7 +23,10 @@ import Card from '@mui/material/Card';
 
 import { useTransfers } from '@hooks/edc/useTransfers';
 import { Transfer } from '@models/types/edc/transfer';
-import { Box, List, ListItem, Typography } from '@mui/material';
+import { Box, List, ListItem } from '@mui/material';
+import Text from '../theme/components/Text';
+import Subtitle from '../theme/components/Subtitle';
+import H6 from '../theme/components/H6';
 
 type TransferCardProps = {
     transfer: Transfer;
@@ -32,7 +35,7 @@ type TransferCardProps = {
 const TransferCard = ({ transfer }: TransferCardProps) => {
     return (
         <Card sx={{ padding: '1.25rem' }}>
-            <Typography variant="h6" mb="0.5rem" fontWeight="600">Transfer</Typography>
+            <H6 mb="0.5rem" fontWeight="600">Transfer</H6>
             <Box sx={{
                 display: 'flex',
                 width: '100%',
@@ -45,35 +48,35 @@ const TransferCard = ({ transfer }: TransferCardProps) => {
                     gap: '0.5rem'
                 }}>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Transfer Id: </Typography>
+                        <Text fontWeight="600" width="30ch"> Transfer Id: </Text>
                         {transfer['@id']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Correlation Id: </Typography>
+                        <Text fontWeight="600" width="30ch"> Correlation Id: </Text>
                         {transfer['edc:correlationId']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> State: </Typography>
+                        <Text fontWeight="600" width="30ch"> State: </Text>
                         {transfer['edc:state']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> State Timestamp: </Typography>
+                        <Text fontWeight="600" width="30ch"> State Timestamp: </Text>
                         {new Date(transfer['edc:stateTimestamp']).toLocaleString()}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Type: </Typography>
+                        <Text fontWeight="600" width="30ch"> Type: </Text>
                         {transfer['edc:type']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Asset Id: </Typography>
+                        <Text fontWeight="600" width="30ch"> Asset Id: </Text>
                         {transfer['edc:assetId']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Contract Id: </Typography>
-                        <Typography variant="body1" sx={{ wordBreak: 'break-all', width: '60ch' }}>{transfer['edc:contractId']}</Typography>
+                        <Text fontWeight="600" width="30ch"> Contract Id: </Text>
+                        <Text sx={{ wordBreak: 'break-all', width: '60ch' }}>{transfer['edc:contractId']}</Text>
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Connector Id: </Typography>
+                        <Text fontWeight="600" width="30ch"> Connector Id: </Text>
                         {transfer['edc:connectorId']}
                     </Box>
                 </Box>
@@ -92,7 +95,7 @@ export const TransferView = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <Typography variant="subtitle1">Transfers</Typography>
+            <Subtitle>Transfers</Subtitle>
             <List sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -106,7 +109,7 @@ export const TransferView = () => {
                         </ListItem>
                     ))
                 ) : (
-                    <Typography variant="body1" align="center">No transfers found. This Page will be updated as soon as there are transfers.</Typography>
+                    <Text align="center">No transfers found. This Page will be updated as soon as there are transfers.</Text>
                 )}
             </List>
         </Box>

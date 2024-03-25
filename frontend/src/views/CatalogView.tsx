@@ -19,12 +19,17 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-import { Input, LoadingButton } from '@catena-x/portal-shared-components';
+import { Input } from '@catena-x/portal-shared-components';
 import { useCatalog } from '@hooks/edc/useCatalog';
 import { useRef, useState } from 'react';
 import { CatalogOperation } from '@models/types/edc/catalog';
-import { Box, Card, List, ListItem, Typography } from '@mui/material';
+import { Box, Card, List, ListItem } from '@mui/material';
 import { getCatalogOperator } from '@util/helpers';
+import CustomButton from '../theme/components/CustomButton';
+import Text from '../theme/components/Text';
+import Subtitle from '../theme/components/Subtitle';
+import H6 from '../theme/components/H6';
+
 
 type OperationListProps = {
     title: string;
@@ -34,7 +39,7 @@ type OperationListProps = {
 const OperationList = ({ title, operations }: OperationListProps) => {
     return (
         <>
-            <Typography variant="body1" fontWeight="600">{title}</Typography>
+            <Text fontWeight="600">{title}</Text>
             {operations && operations.length > 0 ? (
                 <List>
                     {operations.map((operation, index) => (
@@ -46,7 +51,7 @@ const OperationList = ({ title, operations }: OperationListProps) => {
                     ))}
                 </List>
             ) : (
-                <Typography variant="body1">None</Typography>
+                <Text>None</Text>
             )}
         </>
     );
@@ -54,7 +59,7 @@ const OperationList = ({ title, operations }: OperationListProps) => {
 
 export const CatalogView = () => {
     const [edcUrl, setEdcUrl] = useState<string | null>(null);
-    const { catalog, catalogError, isLoadingCatalog } = useCatalog(edcUrl);
+    const { catalog, catalogError } = useCatalog(edcUrl);
     const urlRef = useRef<string | null>(null);
     return (
         <Box sx={{
@@ -64,7 +69,7 @@ export const CatalogView = () => {
             height: '100%',
             width: '100%'
         }}>
-            <Typography variant="subtitle1">View EDC Catalog</Typography>
+            <Subtitle>View EDC Catalog</Subtitle>
             <Box sx={{
                 display: 'flex',
                 alignItems: 'flex-end',
@@ -79,12 +84,10 @@ export const CatalogView = () => {
                     onChange={(event) => (urlRef.current = event.target.value)}
                 />
                 <Box mb="0.75rem">
-                    <LoadingButton
-                        label="Get Catalog"
-                        loadIndicator="Loading..."
-                        loading={isLoadingCatalog}
-                        onButtonClick={() => setEdcUrl(urlRef?.current)}
-                    />
+                    <CustomButton
+                        onClick={() => setEdcUrl(urlRef?.current)}>
+                            Get Catalog
+                    </CustomButton>
                 </Box>
             </Box>
             {catalog && catalog.length > 0 ? (
@@ -97,7 +100,7 @@ export const CatalogView = () => {
                     {catalog.map((item, index) => (
                         <ListItem key={index}>
                             <Card sx={{ padding: '1.25rem' }}>
-                                <Typography variant="h6" fontWeight="600">Catalog Item</Typography>
+                                <H6 fontWeight="600">Catalog Item</H6>
                                 <Box sx={{
                                     display: 'flex',
                                     width: '100%',
@@ -111,19 +114,19 @@ export const CatalogView = () => {
                                         width: '70ch'
                                     }}>
                                         <Box display="flex">
-                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset ID: </Typography>
+                                            <Text fontWeight="600" width="20ch">Asset ID: </Text>
                                             "{item.assetId}"
                                         </Box>
                                         <Box display="flex">
-                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset type: </Typography>
+                                            <Text fontWeight="600" width="20ch">Asset type: </Text>
                                             "{item.assetType}"
                                         </Box>
                                         <Box display="flex">
-                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset action: </Typography>
+                                            <Text fontWeight="600" width="20ch">Asset action: </Text>
                                             {item.permission['odrl:action']['odrl:type']} {item.permission['odrl:target']}
                                         </Box>
                                         <Box display="flex">
-                                            <Typography variant="body1" fontWeight="600" width="20ch">Asset condition: </Typography>
+                                            <Text fontWeight="600" width="20ch">Asset condition: </Text>
                                             {item.permission['odrl:constraint']['odrl:leftOperand'] + ' '}
                                             {getCatalogOperator(item.permission['odrl:constraint']['odrl:operator']['@id']) + ' '}
                                             {item.permission['odrl:constraint']['odrl:rightOperand']}
@@ -146,9 +149,9 @@ export const CatalogView = () => {
             ) : (
                 <Box py="1.25rem">
                     {catalogError != null ? (
-                        <Typography variant="body1" color="error">There was an error retrieving the Catalog from {edcUrl}</Typography>
+                        <Text color="error">There was an error retrieving the Catalog from {edcUrl}</Text>
                     ) : (
-                        <Typography variant="body1"> {`No Catalog available for ${edcUrl}`} </Typography>
+                        <Text> {`No Catalog available for ${edcUrl}`} </Text>
                     )}
                 </Box>
             )}

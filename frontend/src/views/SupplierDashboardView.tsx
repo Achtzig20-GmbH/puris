@@ -23,7 +23,9 @@ import { Input, Table } from '@catena-x/portal-shared-components';
 import { useState } from 'react';
 import { ConfidentialBanner } from '@components/ConfidentialBanner';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import SmallText from '../theme/components/SmallText';
+import Subtitle from '../theme/components/Subtitle';
 
 type Customer = {
     name: string;
@@ -173,8 +175,7 @@ const dateColumns = [
                 data.row.material &&
                 data.row[index] < data.row.material.demandActual[index] + (data.row.material.demandAdditional[index] ?? 0);
             return (
-                <Typography
-                    variant="body2"
+                <SmallText
                     color={isInsufficientProduction ? 'error' : ''}
                     sx={{
                         display: 'grid',
@@ -183,7 +184,7 @@ const dateColumns = [
                         height: '100%'
                     }}>
                     {data.row[index]}
-                </Typography>
+                </SmallText>
             );
         },
     })),
@@ -234,7 +235,7 @@ export const SupplierDashboardView = () => {
             alignItems: 'center'
         }}>
             <ConfidentialBanner />
-            <Typography variant="subtitle1" mt="1.25rem">Supplier Dashboard</Typography>
+            <Subtitle mt="1.25rem">Supplier Dashboard</Subtitle>
             <Box sx={{
                 display: 'flex',
                 gap: '0.5rem',

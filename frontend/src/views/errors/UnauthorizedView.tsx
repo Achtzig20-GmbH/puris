@@ -18,7 +18,8 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Subtitle from "../../theme/components/Subtitle";
 
 export const UnauthorizedView = () => {
     return (
@@ -30,7 +31,7 @@ export const UnauthorizedView = () => {
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-            <Typography variant="subtitle1">Unauthorized</Typography>
+            <Subtitle>Unauthorized</Subtitle>
         </Box>
     );
 }

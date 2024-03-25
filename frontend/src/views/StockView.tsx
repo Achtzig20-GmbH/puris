@@ -23,7 +23,8 @@ import { useState } from 'react';
 import { Tab, TabPanel, Tabs } from '@catena-x/portal-shared-components';
 import { ConfidentialBanner } from '@components/ConfidentialBanner';
 import { StockDetailsView } from '@features/stock-view/components/StockDetailsView';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import Subtitle from '../theme/components/Subtitle';
 
 export const StockView = () => {
     const [selectedTab, setSelectedTab] = useState<number>(0);
@@ -38,7 +39,7 @@ export const StockView = () => {
                 alignItems: 'center',
                 padding: '1.25rem'
             }}>
-                <Typography variant="subtitle1">View and manage stocks</Typography>
+                <Subtitle>View and manage stocks</Subtitle>
                 <Tabs value={selectedTab} onChange={(_, value: number) => setSelectedTab(value)}>
                     <Tab label="Material Stocks"></Tab>
                     <Tab label="Product Stocks"></Tab>

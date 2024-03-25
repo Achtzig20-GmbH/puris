@@ -18,10 +18,12 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-import { LoadingButton, Table } from '@catena-x/portal-shared-components';
+import { Table } from '@catena-x/portal-shared-components';
 import { Stock, StockType } from '@models/types/data/stock';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { getUnitOfMeasurement } from '@util/helpers';
+import CustomButton from '../../../theme/components/CustomButton';
+import SmallText from '../../../theme/components/SmallText';
 
 type PartnerStockTableProps<T extends StockType> = {
     type: T;
@@ -60,8 +62,8 @@ const partnerStockTableColumns = [
         field: 'customerOrder',
         renderCell: (params: { row: Stock }) => (
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="body2">{params.row.customerOrderNumber}</Typography>
-                <Typography variant="body2">{params.row.customerOrderPositionNumber}</Typography>
+                <SmallText>{params.row.customerOrderNumber}</SmallText>
+                <SmallText>{params.row.customerOrderPositionNumber}</SmallText>
             </Box>
         ),
         headerName: 'Customer Order',
@@ -80,7 +82,7 @@ const partnerStockTableColumns = [
     },
 ];
 
-export const PartnerStockTable = <T extends StockType>({ type, materialName, partnerStocks, onRefresh, isRefreshing, lastUpdated = null }: PartnerStockTableProps<T>) => {
+export const PartnerStockTable = <T extends StockType>({ type, materialName, partnerStocks, onRefresh, lastUpdated = null }: PartnerStockTableProps<T>) => {
     return (
         <Box position="relative">
             <Table
@@ -102,14 +104,11 @@ export const PartnerStockTable = <T extends StockType>({ type, materialName, par
                 top: '2rem',
                 right: '2rem'
             }}>
-                { lastUpdated && <Typography variant="body2" mr="1rem">refresh requested at {lastUpdated.toLocaleTimeString()}</Typography> }
-                <LoadingButton
-                    label='Refresh Stocks'
-                    loadIndicator='refreshing...'
-                    loading={isRefreshing}
-                    variant="contained"
-                    onButtonClick={() => onRefresh()}
-                />
+                { lastUpdated && <SmallText mr="1rem">refresh requested at {lastUpdated.toLocaleTimeString()}</SmallText> }
+                <CustomButton
+                    onClick={() => onRefresh()}>
+                        Refresh Stocks
+                </CustomButton>
             </Box>
         </Box>
     );

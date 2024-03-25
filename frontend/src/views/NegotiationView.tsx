@@ -23,7 +23,10 @@ import Card from '@mui/material/Card';
 
 import { useNegotiations } from '@hooks/edc/useNegotiations';
 import { Negotiation } from '@models/types/edc/negotiation';
-import { Box, List, ListItem, Typography } from '@mui/material';
+import { Box, List, ListItem } from '@mui/material';
+import Text from '../theme/components/Text';
+import Subtitle from '../theme/components/Subtitle';
+import H6 from '../theme/components/H6';
 
 type NegotiationCardProps = {
     negotiation: Negotiation;
@@ -32,7 +35,7 @@ type NegotiationCardProps = {
 const NegotiationCard = ({negotiation }: NegotiationCardProps) => {
     return (
         <Card sx={{ padding: '1.25rem' }}>
-            <Typography variant="h6" mb="0.5rem" fontWeight="600">Negotiation</Typography>
+            <H6 mb="0.5rem" fontWeight="600">Negotiation</H6>
             <Box sx={{
                 display: 'flex',
                 width: '100%',
@@ -45,31 +48,31 @@ const NegotiationCard = ({negotiation }: NegotiationCardProps) => {
                     gap: '0.5rem'
                 }}>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Negotiation Id: </Typography>
+                        <Text fontWeight="600" width="30ch"> Negotiation Id: </Text>
                         {negotiation['@id']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Agreement  Id: </Typography>
-                        <Typography variant="body1" sx={{ wordBreak: 'break-all', width: '60ch' }}>{negotiation['edc:contractAgreementId']}</Typography>
+                        <Text fontWeight="600" width="30ch"> Agreement  Id: </Text>
+                        <Text sx={{ wordBreak: 'break-all', width: '60ch' }}>{negotiation['edc:contractAgreementId']}</Text>
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Type: </Typography>
+                        <Text fontWeight="600" width="30ch"> Type: </Text>
                         {negotiation['edc:type']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> State: </Typography>
+                        <Text fontWeight="600" width="30ch"> State: </Text>
                         {negotiation['edc:state']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> CounterParty: </Typography>
+                        <Text fontWeight="600" width="30ch"> CounterParty: </Text>
                         {negotiation['edc:counterPartyId']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Counterparty EDC URL: </Typography>
+                        <Text fontWeight="600" width="30ch"> Counterparty EDC URL: </Text>
                         {negotiation['edc:counterPartyAddress']}
                     </Box>
                     <Box display="flex" gap="1rem">
-                        <Typography variant="body1" fontWeight="600" width="30ch"> Timestamp: </Typography>
+                        <Text fontWeight="600" width="30ch"> Timestamp: </Text>
                         {new Date(negotiation['edc:createdAt']).toLocaleString()}
                     </Box>
                 </Box>
@@ -88,7 +91,7 @@ export const NegotiationView = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <Typography variant="subtitle1">Negotiation</Typography>
+            <Subtitle>Negotiation</Subtitle>
             <List sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -102,7 +105,7 @@ export const NegotiationView = () => {
                         </ListItem>
                     ))
                 ) : (
-                    <Typography variant="body1" align="center">No negotiations found. This list will be updated when Negotiations happen.</Typography>
+                    <Text align="center">No negotiations found. This list will be updated when Negotiations happen.</Text>
                 )}
             </List>
         </Box>

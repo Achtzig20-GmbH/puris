@@ -20,8 +20,9 @@ SPDX-License-Identifier: Apache-2.0
 
 import { Table } from '@catena-x/portal-shared-components';
 import { Stock, StockType } from '@models/types/data/stock';
-import { Box, Typography, capitalize } from '@mui/material';
+import { Box, capitalize } from '@mui/material';
 import { getUnitOfMeasurement } from '@util/helpers';
+import SmallText from '../../../theme/components/SmallText';
 
 type StockTableProps = {
     type: StockType;
@@ -35,8 +36,8 @@ const createStockTableColumns = (type: StockType) => [
         headerName: capitalize(type),
         renderCell: (params: { row: Stock }) => (
             <Box display="flex" flexDirection="column">
-                <Typography variant="body2">{params.row.material?.name}</Typography>
-                <Typography variant="body2">({type === 'material' ? params.row.material?.materialNumberCustomer : params.row.material?.materialNumberSupplier})</Typography>
+                <SmallText>{params.row.material?.name}</SmallText>
+                <SmallText>({type === 'material' ? params.row.material?.materialNumberCustomer : params.row.material?.materialNumberSupplier})</SmallText>
             </Box>
         ),
         flex: 4,
@@ -51,8 +52,8 @@ const createStockTableColumns = (type: StockType) => [
         field: 'partner',
         renderCell: (params: { row: Stock }) => (
             <Box display="flex" flexDirection="column">
-                <Typography variant="body2">{params.row.partner?.name}</Typography>
-                <Typography variant="body2">({params.row.partner?.bpnl})</Typography>
+                <SmallText>{params.row.partner?.name}</SmallText>
+                <SmallText>({params.row.partner?.bpnl})</SmallText>
             </Box>
         ),
         headerName: 'Allocated to Partner',
