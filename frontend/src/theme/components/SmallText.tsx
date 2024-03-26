@@ -3,7 +3,9 @@ import { Typography, TypographyProps } from '@mui/material';
 
 const SmallText: React.FC<TypographyProps> = ({ children, ...props }) => {
    return (
-      <Typography variant="body2" {...props}>
+      <Typography
+         variant="body2"
+         {...props}>
          {children}
       </Typography>
    );

@@ -26,7 +26,7 @@ import { Transfer } from '@models/types/edc/transfer';
 import { Box, List, ListItem } from '@mui/material';
 import Text from '../theme/components/Text';
 import Subtitle from '../theme/components/Subtitle';
-import H6 from '../theme/components/H6';
+import Subtitle2 from '../theme/components/Subtitle2';
 
 type TransferCardProps = {
     transfer: Transfer;
@@ -35,7 +35,7 @@ type TransferCardProps = {
 const TransferCard = ({ transfer }: TransferCardProps) => {
     return (
         <Card sx={{ padding: '1.25rem' }}>
-            <H6 mb="0.5rem" fontWeight="600">Transfer</H6>
+            <Subtitle2 mb="0.5rem" fontWeight="600">Transfer</Subtitle2>
             <Box sx={{
                 display: 'flex',
                 width: '100%',

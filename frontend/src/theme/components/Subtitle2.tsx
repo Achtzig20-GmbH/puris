@@ -1,14 +1,14 @@
 import React from 'react';
 import { Typography, TypographyProps } from '@mui/material';
 
-const Subtitle: React.FC<TypographyProps> = ({ children, ...props }) => {
+const Subtitle2: React.FC<TypographyProps> = ({ children, ...props }) => {
    return (
       <Typography
-         variant="subtitle1"
+         variant="h6"
          {...props}>
          {children}
       </Typography>
    );
 }
 
-export default Subtitle;
+export default Subtitle2;

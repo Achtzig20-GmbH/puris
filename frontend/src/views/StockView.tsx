@@ -44,7 +44,10 @@ export const StockView = () => {
                     <Tab label="Material Stocks"></Tab>
                     <Tab label="Product Stocks"></Tab>
                 </Tabs>
-                <Box display="flex" width="100%" justifyContent='center'>
+                <Box
+                    display="flex"
+                    width="100%"
+                    justifyContent='center'>
                     <TabPanel value={selectedTab} index={0}>
                         <StockDetailsView type="material" />
                     </TabPanel>

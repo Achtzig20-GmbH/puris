@@ -28,7 +28,7 @@ import { getCatalogOperator } from '@util/helpers';
 import CustomButton from '../theme/components/CustomButton';
 import Text from '../theme/components/Text';
 import Subtitle from '../theme/components/Subtitle';
-import H6 from '../theme/components/H6';
+import Subtitle2 from '../theme/components/Subtitle2';
 
 
 type OperationListProps = {
@@ -100,7 +100,7 @@ export const CatalogView = () => {
                     {catalog.map((item, index) => (
                         <ListItem key={index}>
                             <Card sx={{ padding: '1.25rem' }}>
-                                <H6 fontWeight="600">Catalog Item</H6>
+                                <Subtitle2 fontWeight="600">Catalog Item</Subtitle2>
                                 <Box sx={{
                                     display: 'flex',
                                     width: '100%',
