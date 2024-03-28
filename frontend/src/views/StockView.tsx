@@ -34,7 +34,6 @@ export const StockView = () => {
             <Box sx={{
                 display: 'flex',
                 height: '100%',
-                width: '100%',
                 flexDirection: 'column',
                 alignItems: 'center',
                 padding: '1.25rem'

@@ -56,9 +56,10 @@ button.side-menu-item {
     align-items: center;
     padding: 0.5rem 1rem;
     color: darkslategrey;
-    background-color: aliceblue;
+    background-color: #f2f2f2;
     border-radius: 0.4rem;
     width: 100%;
+    text-decoration: none;
 }
 
 .side-menu-item:hover,

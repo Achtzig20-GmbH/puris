@@ -27,7 +27,6 @@ export const ConfidentialBanner = () => {
         <Box sx={{
             backgroundColor: palette.error.light,
             fontWeight: '600',
-            width: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
