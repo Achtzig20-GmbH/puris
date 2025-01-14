@@ -1,8 +1,9 @@
 import { Material } from '@models/types/data/stock';
 import { DirectionType } from '@models/types/erp/directionType';
 import { Add, ChevronLeftOutlined, Refresh } from '@mui/icons-material';
-import { Button, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import { useDataModal } from '@contexts/dataModalContext';
+import { Link } from 'react-router-dom';
 
 type MaterialDetailsHeaderProps = {
     material: Material;
@@ -15,9 +16,11 @@ export function MaterialDetailsHeader({ material, direction, onRefresh }: Materi
     return (
         <>
             <Stack direction="row" alignItems="center" spacing={1} width="100%">
-                <IconButton>
-                    <ChevronLeftOutlined />
-                </IconButton>
+                <Link to="/materials">
+                    <Box padding="0.25rem" display="flex" alignItems="center">
+                        <ChevronLeftOutlined />
+                    </Box>
+                </Link>
                 <Typography variant="h2" component="h1" marginRight="auto !important">
                     Production Information for {material?.name}
                 </Typography>
@@ -25,11 +28,17 @@ export function MaterialDetailsHeader({ material, direction, onRefresh }: Materi
                     <Refresh></Refresh> Refresh
                 </Button>
                 {direction === DirectionType.Outbound ? (
-                    <Button sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} onClick={() => openDialog('production', {}, 'create')}>
+                    <Button
+                        sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+                        onClick={() => openDialog('production', {}, 'create')}
+                    >
                         <Add></Add> Add Production
                     </Button>
                 ) : (
-                    <Button sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} onClick={() => openDialog('demand', {}, 'create')}>
+                    <Button
+                        sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+                        onClick={() => openDialog('demand', {}, 'create')}
+                    >
                         <Add></Add> Add Demand
                     </Button>
                 )}
