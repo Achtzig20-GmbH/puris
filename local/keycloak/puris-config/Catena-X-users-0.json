@@ -19,7 +19,8 @@
     "requiredActions" : [ ],
     "realmRoles" : [ "default-roles-catena-x" ],
     "clientRoles" : {
-      "Cl3-PURIS" : [ "PURIS_ADMIN" ]
+      "PURIS-Supplier" : [ "PURIS_ADMIN" ],
+      "PURIS-Customer" : [ "PURIS_ADMIN" ]
     },
     "notBefore" : 0,
     "groups" : [ ]
@@ -42,7 +43,8 @@
     "requiredActions" : [ ],
     "realmRoles" : [ "default-roles-catena-x" ],
     "clientRoles" : {
-      "Cl3-PURIS" : [ "PURIS_USER" ]
+      "PURIS-Supplier" : [ "PURIS_USER" ],
+      "PURIS-Customer" : [ "PURIS_USER" ]
     },
     "notBefore" : 0,
     "groups" : [ ]

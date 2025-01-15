@@ -40,7 +40,7 @@ const init = () => {
         keycloak
             .init({
                 onLoad: 'login-required',
-                redirectUri: config.auth.IDP_REDIRECT_URL_FRONTEND,
+                /* redirectUri: config.auth.IDP_REDIRECT_URL_FRONTEND, */
                 enableLogging: true,
             })
             .then((authenticated) => {
@@ -49,6 +49,7 @@ const init = () => {
                     reject();
                 } else {
                     console.info("User '%s' authenticated.", getUsername());
+                    console.info("id token", keycloak.idTokenParsed);
                     resolve();
                 }
             })

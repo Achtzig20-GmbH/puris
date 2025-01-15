@@ -45,7 +45,7 @@ type MaterialDetailsProps = {
 };
 
 export function MaterialDetails({ material, direction }: MaterialDetailsProps) {
-    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [, setIsRefreshing] = useState(false);
     const { notify } = useNotifications();
     const { addOnSaveListener, removeOnSaveListener } = useDataModal();
     const {

@@ -46,7 +46,11 @@ services:
       - ENDPOINT_PRODUCTION=production
       - ENDPOINT_PRODUCTION_RANGE=production/range
       - ENDPOINT_DELIVERY=delivery
-      - IDP_DISABLE=true
+      - IDP_DISABLE=false
+      - IDP_URL=http://localhost:10081/
+      - IDP_REALM=Catena-X
+      - IDP_CLIENT_ID=PURIS-Customer
+      - IDP_REDIRECT_URL_FRONTEND=http://localhost:3000/
       - NGINX_RATE_LIMIT=10m
       - NGINX_BURST=30
       - NGINX_RATE=10r/s
@@ -206,7 +210,11 @@ services:
       - ENDPOINT_PRODUCTION=production
       - ENDPOINT_PRODUCTION_RANGE=production/range
       - ENDPOINT_DELIVERY=delivery
-      - IDP_DISABLE=true
+      - IDP_DISABLE=false
+      - IDP_URL=http://localhost:10081/
+      - IDP_REALM=Catena-X
+      - IDP_CLIENT_ID=PURIS-Supplier
+      - IDP_REDIRECT_URL_FRONTEND=http://localhost:3001/
       - NGINX_RATE_LIMIT=10m
       - NGINX_BURST=30
       - NGINX_RATE=10r/s

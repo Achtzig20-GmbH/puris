@@ -1,7 +1,7 @@
 import { Material } from '@models/types/data/stock';
 import { DirectionType } from '@models/types/erp/directionType';
 import { Add, ChevronLeftOutlined, Refresh } from '@mui/icons-material';
-import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { useDataModal } from '@contexts/dataModalContext';
 import { Link } from 'react-router-dom';
 
@@ -21,8 +21,8 @@ export function MaterialDetailsHeader({ material, direction, onRefresh }: Materi
                         <ChevronLeftOutlined />
                     </Box>
                 </Link>
-                <Typography variant="h2" component="h1" marginRight="auto !important">
-                    Production Information for {material?.name}
+                <Typography variant="h3" component="h1" marginRight="auto !important">
+                    {direction === DirectionType.Outbound ? 'Production Information' : 'Demand Information'} for {material?.name}
                 </Typography>
                 <Button sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} onClick={onRefresh}>
                     <Refresh></Refresh> Refresh
