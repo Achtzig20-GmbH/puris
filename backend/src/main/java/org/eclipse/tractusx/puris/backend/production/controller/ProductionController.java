@@ -216,10 +216,11 @@ public class ProductionController {
 
     @GetMapping("reported")
     @ResponseBody
-    @Operation(summary = "Get all productions of partners for a material", description = "Get all productions of partners for a material number. Optionally the partners can be filtered by their bpnl and the production site can be filtered by its bpns.")
-    public List<ProductionDto> getAllProductionsForPartner(
-            @Parameter(description = "encoded in base64") String ownMaterialNumber, Optional<String> bpnl,
-            Optional<String> site) {
+    @Operation(
+        summary = "Get all productions of partners for a material",
+        description = "Get all productions of partners for a material number. Optionally the partners can be filtered by their bpnl and the production site can be filtered by its bpns."
+    )
+    public List<ProductionDto> getAllProductionsForPartner(@Parameter(description = "encoded in base64") String ownMaterialNumber, Optional<String> bpnl, Optional<String> site) {
         if (ownMaterialNumber != null) {
             ownMaterialNumber = new String(Base64.getDecoder().decode(ownMaterialNumber));
         }
@@ -230,8 +231,7 @@ public class ProductionController {
     @GetMapping("reported/refresh")
     @ResponseBody
     @Operation(summary = "Refreshes all reported productions", description = "Refreshes all reported productions from the production request API.")
-    public ResponseEntity<List<PartnerDto>> refreshReportedProductions(
-            @RequestParam @Parameter(description = "encoded in base64") String ownMaterialNumber) {
+    public ResponseEntity<List<PartnerDto>> refreshReportedProductions(@RequestParam @Parameter(description = "encoded in base64") String ownMaterialNumber) {
         if (ownMaterialNumber != null) {
             ownMaterialNumber = new String(Base64.getDecoder().decode(ownMaterialNumber));
         }

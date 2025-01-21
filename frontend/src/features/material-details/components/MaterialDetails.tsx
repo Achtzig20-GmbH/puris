@@ -1,3 +1,23 @@
+/*
+Copyright (c) 2025 Volkswagen AG
+Copyright (c) 2025 Contributors to the Eclipse Foundation
+
+See the NOTICE file(s) distributed with this work for additional
+information regarding copyright ownership.
+
+This program and the accompanying materials are made available under the
+terms of the Apache License, Version 2.0 which is available at
+https://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations
+under the License.
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
 import { ConfidentialBanner } from '@components/ConfidentialBanner';
 import { CalendarWeekProvider } from '@contexts/calendarWeekContext';
 import { Box, capitalize, Stack, Typography } from '@mui/material';
@@ -7,12 +27,12 @@ import { CollapsibleSummary } from './CollapsibleSummary';
 import { DataCategory, useMaterialDetails } from '../hooks/useMaterialDetails';
 import { useNotifications } from '@contexts/notificationContext';
 import { useDataModal } from '@contexts/dataModalContext';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { groupBy } from '@util/helpers';
 import { DirectionType } from '@models/types/erp/directionType';
 import { createSummary } from '../util/summary-service';
 import { Partner } from '@models/types/edc/partner';
-import { requestReportedStocks } from '@services/stocks-service';
+import { requestReportedStocks, scheduleErpUpdateStocks } from '@services/stocks-service';
 import { requestReportedDeliveries } from '@services/delivery-service';
 import { requestReportedProductions } from '@services/productions-service';
 import { requestReportedDemands } from '@services/demands-service';
@@ -45,7 +65,8 @@ type MaterialDetailsProps = {
 };
 
 export function MaterialDetails({ material, direction }: MaterialDetailsProps) {
-    const [, setIsRefreshing] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [isSchedulingUpdate, setIsSchedulingUpdate] = useState(false);
     const { notify } = useNotifications();
     const { addOnSaveListener, removeOnSaveListener } = useDataModal();
     const {
@@ -61,16 +82,16 @@ export function MaterialDetails({ material, direction }: MaterialDetailsProps) {
         isLoading,
         refresh,
     } = useMaterialDetails(material.ownMaterialNumber ?? '', direction);
-    const incomingDeliveries = deliveries?.filter((d) => sites?.some((site) => site.bpns === d.destinationBpns));
-    const outgoingShipments = deliveries?.filter((d) => sites?.some((site) => site.bpns === d.originBpns));
-    const groupedProductions = groupBy(productions ?? [], (prod) => prod.productionSiteBpns);
-    const groupedDemands = groupBy(demands ?? [], (dem) => dem.demandLocationBpns);
-    const groupedIncomingDeliveries = groupBy(incomingDeliveries ?? [], (del) => del.destinationBpns);
-    const groupedOutgoingShipments = groupBy(outgoingShipments ?? [], (del) => del.originBpns);
-    const groupedStocks = groupBy(stocks ?? [], (stock) => stock.stockLocationBpns);
+    const incomingDeliveries = useMemo(() => deliveries?.filter((d) => sites?.some((site) => site.bpns === d.destinationBpns)), [deliveries, sites]);
+    const outgoingShipments = useMemo(() => deliveries?.filter((d) => sites?.some((site) => site.bpns === d.originBpns)), [deliveries, sites]);
+    const groupedProductions = useMemo(() => groupBy(productions ?? [], (prod) => prod.productionSiteBpns), [productions]);
+    const groupedDemands = useMemo(() => groupBy(demands ?? [], (dem) => dem.demandLocationBpns), [demands]);
+    const groupedIncomingDeliveries = useMemo(() => groupBy(incomingDeliveries ?? [], (del) => del.destinationBpns), [incomingDeliveries]);
+    const groupedOutgoingShipments = useMemo(() => groupBy(outgoingShipments ?? [], (del) => del.originBpns), [outgoingShipments]);
+    const groupedStocks = useMemo(() => groupBy(stocks ?? [], (stock) => stock.stockLocationBpns), [stocks]);
 
     useEffect(() => {
-        const callback = (category: DataCategory) => refresh([category])
+        const callback = (category: DataCategory) => refresh([category]);
         addOnSaveListener(callback);
         return () => removeOnSaveListener(callback);
     }, [addOnSaveListener, refresh, removeOnSaveListener]);
@@ -147,12 +168,53 @@ export function MaterialDetails({ material, direction }: MaterialDetailsProps) {
             .finally(() => setIsRefreshing(false));
     };
 
+    const handleScheduleUpdate = () => {
+        setIsSchedulingUpdate(true);
+        Promise.all(
+            expandablePartners.map((partner) =>
+                scheduleErpUpdateStocks(
+                    direction === DirectionType.Outbound ? 'product' : 'material',
+                    partner.bpnl,
+                    material.ownMaterialNumber
+                )
+            )
+        )
+            .then(() => {
+                notify({
+                    title: 'Update requested',
+                    description: `Scheduled ERP data update of stocks for ${material?.ownMaterialNumber} in your role as ${
+                        direction === DirectionType.Inbound ? 'Customer' : 'Supplier'
+                    }. Please reload dialog later.`,
+                    severity: 'success',
+                });
+            })
+            .catch((error: unknown) => {
+                const msg =
+                    error !== null && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
+                        ? error.message
+                        : 'Unknown Error';
+                notify({
+                    title: 'Error scheduling ERP update',
+                    description: msg,
+                    severity: 'error',
+                });
+            })
+            .finally(() => setIsSchedulingUpdate(false));
+    };
+
     return (
         <CalendarWeekProvider>
             <Stack spacing={2}>
                 <ConfidentialBanner />
-                <MaterialDetailsHeader material={material} direction={direction} onRefresh={handleRefresh} />
-                <Stack spacing={10}>
+                <MaterialDetailsHeader
+                    material={material}
+                    direction={direction}
+                    isRefreshing={isRefreshing}
+                    isSchedulingUpdate={isSchedulingUpdate}
+                    onRefresh={handleRefresh}
+                    onScheduleUpdate={handleScheduleUpdate}
+                />
+                <Stack spacing={5}>
                     <SummaryContainer>
                         <SummaryPanel title={`${capitalize(summary.type ?? '')} Summary`} summary={summary} showHeader />
                         {expandablePartners.map((partner) => (
@@ -162,9 +224,7 @@ export function MaterialDetails({ material, direction }: MaterialDetailsProps) {
                                 renderTitle={() => (
                                     <>
                                         <Typography variant="body1">{partner.name}</Typography>
-                                        <Typography variant="body3" color="#ccc">
-                                            ({partner.bpnl})
-                                        </Typography>
+                                        <Typography variant="body3" color="#ccc">({partner.bpnl})</Typography>
                                     </>
                                 )}
                             >
@@ -175,13 +235,9 @@ export function MaterialDetails({ material, direction }: MaterialDetailsProps) {
                                         variant="sub"
                                         renderTitle={() => (
                                             <>
-                                                <Typography variant="body2" color="#ccc">
-                                                    {partner.name}/
-                                                </Typography>
+                                                <Typography variant="body2" color="#ccc">{partner.name}/</Typography>
                                                 <Typography variant="body1">{site.name}</Typography>
-                                                <Typography variant="body3" color="#ccc">
-                                                    ({site.bpns})
-                                                </Typography>
+                                                <Typography variant="body3" color="#ccc">({site.bpns})</Typography>
                                             </>
                                         )}
                                     />

@@ -1,3 +1,22 @@
+/*
+Copyright (c) 2025 Volkswagen AG
+Copyright (c) 2025 Contributors to the Eclipse Foundation
+
+See the NOTICE file(s) distributed with this work for additional
+information regarding copyright ownership.
+
+This program and the accompanying materials are made available under the
+terms of the Apache License, Version 2.0 which is available at
+https://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations
+under the License.
+
+SPDX-License-Identifier: Apache-2.0
+*/
 
 export type CalendarWeek = {
   week: number;
@@ -5,6 +24,11 @@ export type CalendarWeek = {
   startDate: Date;
 }
 
+/**
+ * Calculates the calendar week for a given date.
+ * @param date the date for which to calculate the calendar week
+ * @returns the calendar week
+ */
 export function getCalendarWeek(date: Date): CalendarWeek {
   const targetDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   targetDate.setUTCDate(targetDate.getUTCDate() + 4 - (targetDate.getUTCDay() || 7));
@@ -18,6 +42,12 @@ export function getCalendarWeek(date: Date): CalendarWeek {
   return { week, isoYear, startDate: startOfTargetWeek };
 }
 
+/**
+ * Increments the calendar week by a given amount.
+ * @param cw the calendar week to increment
+ * @param amount the amount by which to increment the calendar week
+ * @returns the incremented calendar week
+ */
 export function incrementCalendarWeek(cw: CalendarWeek, amount: number) {
   const {week, isoYear} = cw;
 
@@ -54,6 +84,12 @@ export function incrementCalendarWeek(cw: CalendarWeek, amount: number) {
   return { week: newWeekNumber, isoYear: newIsoYear, startDate: nextWeekStart };
 }
 
+/**
+ * Increments a date by a given amount of days.
+ * @param date the date to increment
+ * @param days the amount of days by which to increment the date
+ * @returns the incremented date
+ */
 export function incrementDate(date: Date, days: number) {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + days);

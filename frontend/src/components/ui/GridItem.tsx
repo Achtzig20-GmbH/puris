@@ -26,9 +26,9 @@ type GridItemProps = { label: string; value: string };
 
 export const GridItem = ({ label, value }: GridItemProps) => (
     <Grid item xs={6}>
-        <Stack spacing={1}>
-            <Typography variant="body1" color="rgba(0, 0, 0, 0.6)">{label}:</Typography>
-            <Typography variant="body2" padding=".5rem 1rem">
+        <Stack>
+            <Typography variant="body1">{label}:</Typography>
+            <Typography variant="body2" padding="1rem .5rem !important">
                 {value}
             </Typography>
         </Stack>

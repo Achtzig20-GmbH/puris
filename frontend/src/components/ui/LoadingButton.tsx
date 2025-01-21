@@ -18,18 +18,19 @@ under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-import { Material } from '@models/types/data/stock';
-import { useFetch } from './useFetch';
-import { config } from '@models/constants/config';
+import { SvgIconComponent } from '@mui/icons-material';
+import { Button, CircularProgress } from '@mui/material';
 
-export function useMaterial(materialNumber: string) {
-    const params = new URLSearchParams();
-    params.set('ownMaterialNumber', btoa(materialNumber));
-    const { data, error, isLoading, refresh } = useFetch<Material>(config.app.BACKEND_BASE_URL + 'materials?' + params.toString());
-    return {
-        material: data,
-        error,
-        isLoading,
-        refresh,
-    };
+type LoadingButtonProps = {
+    Icon: SvgIconComponent;
+    isLoading: boolean;
+    children: React.ReactNode;
+} & React.ComponentProps<typeof Button>;
+
+export function LoadingButton({ Icon, isLoading, children, onClick, sx = {}, ...props }: LoadingButtonProps) {
+    return (
+        <Button onClick={!isLoading ? onClick : undefined}  sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem', ...sx }} {...props}>
+            {isLoading ? <CircularProgress color="inherit" size=".75rem" /> : <Icon/>} {children}
+        </Button>
+    );
 }

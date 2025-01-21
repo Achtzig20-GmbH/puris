@@ -1,3 +1,23 @@
+/*
+Copyright (c) 2025 Volkswagen AG
+Copyright (c) 2025 Contributors to the Eclipse Foundation
+
+See the NOTICE file(s) distributed with this work for additional
+information regarding copyright ownership.
+
+This program and the accompanying materials are made available under the
+terms of the Apache License, Version 2.0 which is available at
+https://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations
+under the License.
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
 import { Delivery } from '@models/types/data/delivery';
 import { Demand } from '@models/types/data/demand';
 import { Production } from '@models/types/data/production';
@@ -36,6 +56,17 @@ function getDateValue<TType extends SummaryType>(type: TType, entity: SummaryTyp
     );
 }
 
+/**
+ * Creates a material details summary for a given role and timespan. The summary includes the daily sums of primary values, deliveries, and stocks as well as 
+ * the individual corresponding positions.
+ * 
+ * @param type the type of summary to create (production for supplier, demand for customer)
+ * @param primaryValues the list of demands or productions for customers and suppliers respectively
+ * @param deliveries the list of incoming deliveries and outgoing shipments for customers and suppliers respectively
+ * @param stocks the list of stocks for the material
+ * @param timespan the timespan in days to create the summary for
+ * @returns 
+ */
 export function createSummary<TType extends SummaryType>(
     type: TType,
     primaryValues: SummaryTypeMap[TType][],
