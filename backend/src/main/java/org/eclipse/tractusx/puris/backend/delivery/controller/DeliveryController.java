@@ -136,7 +136,9 @@ public class DeliveryController {
         }
 
         try {
-            return convertToDto(ownDeliveryService.create(convertToEntity(deliveryDto)));
+            var dto = convertToDto(ownDeliveryService.create(convertToEntity(deliveryDto)));
+            materialService.updateTimestamp(deliveryDto.getOwnMaterialNumber());
+            return dto;
         } catch (KeyAlreadyExistsException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Delivery already exists. Use PUT instead.");
         } catch (IllegalArgumentException e) {
@@ -159,6 +161,7 @@ public class DeliveryController {
         if (updatedDelivery == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Delivery does not exist.");
         }
+        materialService.updateTimestamp(dto.getOwnMaterialNumber());
         return convertToDto(updatedDelivery);
     }
 
@@ -177,6 +180,7 @@ public class DeliveryController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Delivery does not exist.");
         }
         ownDeliveryService.delete(id);
+        materialService.updateTimestamp(delivery.getMaterial().getOwnMaterialNumber());
     }
 
     @GetMapping("reported/refresh")
