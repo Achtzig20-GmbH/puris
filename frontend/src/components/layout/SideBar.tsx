@@ -115,9 +115,8 @@ type SideBarItemProps = (
 
 const sideBarItems: SideBarItemProps[] = [
     { name: 'Materials', icon: <HomeOutlined />, path: '/materials' },
-    { name: 'Dashboard', icon: <HomeOutlined />, path: '/dashboard' },
-    { name: 'Notifications', icon: <NotificationsOutlined />, path: '/notifications' },
     { name: 'Stocks', icon: <Inventory2Outlined />, path: '/stocks' },
+    { name: 'Notifications', icon: <NotificationsOutlined />, path: '/notifications' },
     { name: 'Catalog', icon: <AutoStoriesOutlined />, path: '/catalog', requiredRoles: ['PURIS_ADMIN'] },
     { name: 'Negotiations', icon: <HandshakeOutlined />, path: '/negotiations', requiredRoles: ['PURIS_ADMIN'] },
     { name: 'Transfers', icon: <SyncAltOutlined />, path: '/transfers', requiredRoles: ['PURIS_ADMIN'] },

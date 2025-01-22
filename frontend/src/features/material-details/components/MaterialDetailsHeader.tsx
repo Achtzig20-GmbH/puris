@@ -44,7 +44,7 @@ export function MaterialDetailsHeader({ material, direction, isRefreshing, isSch
                 <Typography variant="h3" component="h1" marginRight="auto !important">
                     {direction === DirectionType.Outbound ? 'Production Information' : 'Demand Information'} for {material?.name}
                 </Typography>
-                <LoadingButton Icon={Schedule} isLoading={isSchedulingUpdate} onClick={onScheduleUpdate}> Schedule ERP Update </LoadingButton>
+                {/* <LoadingButton Icon={Schedule} isLoading={isSchedulingUpdate} onClick={onScheduleUpdate}> Schedule ERP Update </LoadingButton> */}
                 <LoadingButton Icon={Refresh} isLoading={isRefreshing} onClick={onRefresh}> Refresh </LoadingButton>
                 {direction === DirectionType.Outbound ? (
                     <Button sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} onClick={() => openDialog('production', {}, [], 'create')}>

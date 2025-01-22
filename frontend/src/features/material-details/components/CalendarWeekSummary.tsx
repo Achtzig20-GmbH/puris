@@ -79,7 +79,7 @@ export function CalendarWeekSummary<TType extends SummaryType>({
                 {isExpanded ? (
                     <>
                         {weekDates.map((date) => (
-                            <Grid key={date.toLocaleDateString()} item xs={1} height="100%">
+                            <Grid key={date.toLocaleDateString('en-GB')} item xs={1} height="100%">
                                 <Stack height="100%">
                                     {showHeader && (
                                         <Stack
@@ -91,10 +91,10 @@ export function CalendarWeekSummary<TType extends SummaryType>({
                                             sx={{ backgroundColor: '#f5f5f5' }}
                                         >
                                             <Typography variant="body2">
-                                                {date.toLocaleDateString(undefined, { weekday: 'long' })}
+                                                {date.toLocaleDateString('en-GB', { weekday: 'long' })}
                                             </Typography>
                                             <Typography variant="body2" color="#777">
-                                                {date.toLocaleDateString()}
+                                                {date.toLocaleDateString('en-GB')}
                                             </Typography>
                                         </Stack>
                                     )}
@@ -175,10 +175,10 @@ export function CalendarWeekSummary<TType extends SummaryType>({
                                 <Stack alignItems="center" spacing={0.25}>
                                     <Typography variant="body2">Summary</Typography>
                                     {!isExpanded && (
-                                        <Typography variant="body3" color="#777">{`${cw.startDate.toLocaleDateString()} - ${incrementDate(
+                                        <Typography variant="body3" color="#777">{`${cw.startDate.toLocaleDateString('en-GB')} - ${incrementDate(
                                             cw.startDate,
                                             6
-                                        ).toLocaleDateString()}`}</Typography>
+                                        ).toLocaleDateString('en-GB')}`}</Typography>
                                     )}
                                 </Stack>
                             </Box>
