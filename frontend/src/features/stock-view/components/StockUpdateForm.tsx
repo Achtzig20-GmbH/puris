@@ -113,6 +113,7 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                                                   ? { materialFlag: true, productFlag: false }
                                                   : { materialFlag: false, productFlag: true }),
                                               uuid: null,
+                                              ownMaterialNumber: newValue?.ownMaterialNumber ?? null,
                                               materialNumberCustomer: type === 'material' ? newValue?.ownMaterialNumber ?? null : null,
                                               materialNumberSupplier: type === 'product' ? newValue?.ownMaterialNumber ?? null : null,
                                               materialNumberCx: null,
@@ -202,7 +203,7 @@ export const StockUpdateForm = <T extends StockType>({ items, type, selectedItem
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <InputLabel>Customer Order Number*</InputLabel>
+                        <InputLabel>Customer Order Number</InputLabel>
                         <Input
                             hiddenLabel
                             id="customer-order-number"
